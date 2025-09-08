@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     // --- Pre-loader ---
     const preloader = document.querySelector('.preloader');
     window.addEventListener('load', () => {
         setTimeout(() => preloader.classList.add('hidden'), 500);
     });
-    
+
     // --- Sticky Header on Scroll ---
     const header = document.querySelector('.site-header');
     window.addEventListener('scroll', () => {
@@ -13,6 +13,49 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
+        }
+    });
+
+    // --- Navbar Toggle for Mobile ---
+    const menuBtn = document.getElementById('menu-btn');
+    const navbar = document.querySelector('.navbar');
+    menuBtn.addEventListener('click', () => {
+        navbar.classList.toggle('active');
+        menuBtn.classList.toggle('fa-times'); // Changes icon to 'X'
+    });
+
+    // --- Skills Slider (SwiperJS) for Endless Scroll ---
+    const skillsSlider = new Swiper('.skills-slider', {
+        loop: true,
+        slidesPerView: 7, // Display around 7 slides at a time
+        spaceBetween: 40, // Space between icons
+        speed: 5000, // Speed of the scroll (adjust as needed)
+        allowTouchMove: false, // Disable manual touch/drag
+        autoplay: {
+            delay: 1, // Minimal delay for continuous effect
+            disableOnInteraction: false, // Keep autoplaying even after user interaction
+        },
+        breakpoints: {
+            // when window width is >= 320px
+            320: {
+                slidesPerView: 3,
+                spaceBetween: 20
+            },
+            // when window width is >= 480px
+            480: {
+                slidesPerView: 4,
+                spaceBetween: 30
+            },
+            // when window width is >= 768px
+            768: {
+                slidesPerView: 5,
+                spaceBetween: 40
+            },
+            // when window width is >= 1024px
+            1024: {
+                slidesPerView: 7,
+                spaceBetween: 40
+            }
         }
     });
 
@@ -27,24 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, { threshold: 0.1 });
     scrollElements.forEach(el => observer.observe(el));
-    
-    // --- Particles.js Background Initialization ---
-    if (document.getElementById('particles-js')) {
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5 },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
-                "move": { "enable": true, "speed": 4, "direction": "none", "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
-                "modes": { "repulse": { "distance": 100 }, "push": { "particles_nb": 4 } }
-            },
-            "retina_detect": true
-        });
-    }
 
     // --- Modal Logic ---
     const clickableCards = document.querySelectorAll('[data-modal-target]');
@@ -58,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function openModal(modal) {
-        if (modal == null) return;
+        if (modal == null || !modal.querySelector('.modal-content')) return;
         modal.classList.add('active');
         body.classList.add('modal-open');
     }
@@ -68,13 +93,12 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.classList.remove('active');
         body.classList.remove('modal-open');
     }
-    
+
     const modalOverlays = document.querySelectorAll('.modal-overlay');
     modalOverlays.forEach(overlay => {
         overlay.addEventListener('click', (event) => {
             if (event.target === overlay || event.target.classList.contains('close-modal')) {
-                const modal = overlay.closest('.modal-overlay');
-                closeModal(modal);
+                closeModal(overlay);
             }
         });
     });
@@ -85,15 +109,4 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal(activeModal);
         }
     });
-
-    // --- Contact Form ---
-    const contactForm = document.getElementById('contact-form');
-    if(contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! This is a demo form.');
-            contactForm.reset();
-        });
-    }
-
 });
