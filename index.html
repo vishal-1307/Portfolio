@@ -1,39 +1,49 @@
-<!DOCTYPE html>
+v<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vishal Kumar Thakur - Web Developer Portfolio</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div id="particles-js"></div>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
 
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
     <div class="preloader">
-        <div class="loader-logo">VKT</div>
+        <div class="spinner"></div>
     </div>
 
     <header class="site-header">
-        <a href="#hero" class="logo">VISHAL KUMAR THAKUR</a>
-        <div class="social-links">
-            <a href="https://github.com/vishal-1307" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/vishalthakur13/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.instagram.com/vishal_1307__/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://x.com/Vishal_1315_" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://www.threads.com/@vishalthakur_1307" target="_blank" aria-label="Threads"><i class="fab fa-threads"></i></a>
-        </div>
+        <a href="#hero" class="logo"></a>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="menu-btn" class="fas fa-bars"></div>
     </header>
 
     <main>
         <section id="hero">
             <div class="container hero-content">
                 <h1 class="hero-name">VISHAL KUMAR THAKUR</h1>
-                <p class="hero-title">Aspiring Web Developer. Building Digital Experiences.</p>
+                <p class="hero-title">Aspiring Web Developer</p>
                 <a href="#projects" class="btn">
                     <span>Explore My Work</span>
                 </a>
@@ -45,13 +55,23 @@
                 <h2 class="section-title">About Me</h2>
                 <div class="about-grid animate-on-scroll">
                     <div class="about-text">
-                        <p>A passionate and aspiring web developer with a keen interest in creating user-friendly and visually appealing websites. Based in Madhubani, Bihar, I am currently pursuing my BCA and actively learning and applying web development technologies.</p>
-                        <p>I am the founder of <a href="#" target="_blank" class="text-link">Mithila Kritikala</a>, an NGO dedicated to the promotion of Mithila painting and sewing, for which I also designed and developed the website. This experience has further fueled my passion for web development and its potential to connect and showcase ideas.</p>
-                        <p>My goal is to continuously improve my skills and contribute to meaningful projects. I am also keen to explore the field of Cybersecurity in the future.</p>
+                        <p>I’m an aspiring web developer from Madhubani, Bihar, currently pursuing my BCA. I love
+                            creating websites that are clean, user-friendly, and visually appealing. For me, web
+                            development is not just about coding — it’s about turning ideas into something people can
+                            actually use and enjoy.</p>
+                        <p>I also started <a href="https://mithilakritikala.com/" target="_blank"
+                                class="text-link">Mithila Kritikala</a>, an NGO where we work on keeping Mithila’s art
+                            and culture alive while teaching practical skills like Mithila Painting & Stitching. Along
+                            with running it, I also designed and developed the website myself. That project gave me real
+                            hands-on experience and made me realize how powerful the web is for connecting people and
+                            showcasing creativity.</p>
+                        <p>Right now, my main goal is to keep improving my skills and work on projects that actually
+                            make a difference. In the future, I also want to dive into Cybersecurity because that’s a
+                            field I’m really curious about.</p>
                     </div>
-                    <div class="about-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&h=600&fit=crop&q=80" alt="Vishal Kumar Thakur">
-                    </div>
+                    <!-- <div class="about-image-wrapper">
+                        <img src="Assets/" alt="Vishal Kumar Thakur">
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -60,13 +80,83 @@
             <h2 class="section-title">Skills</h2>
             <div class="swiper skills-slider">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide"><div class="skill-item"><i class="fab fa-html5"></i><span>HTML</span></div></div>
-                    <div class="swiper-slide"><div class="skill-item"><i class="fab fa-css3-alt"></i><span>CSS</span></div></div>
-                    <div class="swiper-slide"><div class="skill-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div></div>
-                    <div class="swiper-slide"><div class="skill-item"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="C++ Icon"><span>C++</span></div></div>
-                    <div class="swiper-slide"><div class="skill-item"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C Icon"><span>C</span></div></div>
-                    <div class="swiper-slide"><div class="skill-item"><i class="fab fa-git-alt"></i><span>Git</span></div></div>
-                    <div class="swiper-slide"><div class="skill-item"><i class="fab fa-github"></i><span>GitHub</span></div></div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-html5"></i><span>HTML</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><img
+                                src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg"
+                                alt="C++ Icon"><span>C++</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><img
+                                src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg"
+                                alt="C Icon"><span>C</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><img
+                                src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg"
+                                alt="MySQL Icon"><span>MySQL</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-github"></i><span>GitHub</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-html5"></i><span>HTML</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-css3-alt"></i><span>CSS</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><img
+                                src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg"
+                                alt="C++ Icon"><span>C++</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><img
+                                src="https://upload.wikimedia.org/wikipedia/commons/1/18/C_Programming_Language.svg"
+                                alt="C Icon"><span>C</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><img
+                                src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg"
+                                alt="MySQL Icon"><span>MySQL</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="skill-item"><i class="fab fa-github"></i><span>GitHub</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="soft-skills" class="page-section">
+            <div class="container">
+                <h2 class="section-title">Soft Skills</h2>
+                <div class="soft-skills-grid animate-on-scroll">
+                    <div class="soft-skill-item">Communication Skills</div>
+                    <div class="soft-skill-item">Problem-Solving</div>
+                    <div class="soft-skill-item">Adaptability & Quick Learning</div>
+                    <div class="soft-skill-item">Teamwork & Collaboration</div>
+                    <div class="soft-skill-item">Leadership</div>
+                    <div class="soft-skill-item">Time Management</div>
+                    <div class="soft-skill-item">Creativity & Innovation</div>
+                    <div class="soft-skill-item">Decision Making</div>
+                    <div class="soft-skill-item">Work Ethics & Consistency</div>
                 </div>
             </div>
         </section>
@@ -74,24 +164,102 @@
         <section id="projects" class="page-section">
             <div class="container">
                 <h2 class="section-title">Projects</h2>
-                <div class="project-carousel-container">
-                    <div class="project-carousel">
-                        <div class="project-card" data-modal-target="#modal-project1"><img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?w=600&q=80" alt="Mithila Kritikala Website"><div class="card-title">Mithila Kritikala Website</div></div>
-                        <div class="project-card" data-modal-target="#modal-project2"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Flood Management System"><div class="card-title">Flood Management System</div></div>
-                        <div class="project-card" data-modal-target="#modal-project3"><img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&q=80" alt="E-commerce Site"><div class="card-title">E-commerce Site</div></div>
+                <div class="projects-grid">
+                    <div class="project-card" data-modal-target="#modal-project1">
+                        <img src="Projects/mithilakritikala.png" alt="Mithila Kritikala Website">
+                        <div class="project-info">
+                            <h3 class="project-title">Mithila Kritikala NGO Website</h3>
+                            <p class="project-description">A website for promoting Mithila painting and sewing arts.</p>
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                            </div>
+                            <button class="btn view-details-btn">View Details</button>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-modal-target="#modal-project2">
+                        <img src="Projects/portfolio.png" alt="Personal Portfolio">
+                        <div class="project-info">
+                            <h3 class="project-title">Personal Portfolio</h3>
+                            <p class="project-description">A modern and responsive website showcasing my skills and journey as a developer.</p>
+                            <div class="project-tags">
+                                <span class="tag">HTML</span>
+                                <span class="tag">CSS</span>
+                                <span class="tag">JavaScript</span>
+                            </div>
+                            <button class="btn view-details-btn">View Details</button>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-modal-target="#modal-project3">
+                        <img src="Projects/Studentinfosys.png" alt="E-commerce Platform">
+                        <div class="project-info">
+                            <h3 class="project-title">Student Information System</h3>
+                            <p class="project-description">A database system built with SQL to efficiently manage student and course information.</p>
+                            <div class="project-tags">
+                                <span class="tag">My SQL</span>
+                            </div>
+                            <button class="btn view-details-btn">View Details</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="certificates" class="page-section">
-             <div class="container">
+            <div class="container">
                 <h2 class="section-title">Certificates</h2>
-                <div class="project-carousel-container">
-                    <div class="project-carousel">
-                        <div class="certificate-card" data-modal-target="#modal-cert1"><img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&q=80" alt="Certificate 1"><div class="card-title">Web Development Basics</div></div>
-                        <div class="certificate-card" data-modal-target="#modal-cert2"><img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?w=400&q=80" alt="Certificate 2"><div class="card-title">JavaScript Algorithms</div></div>
-                        <div class="certificate-card" data-modal-target="#modal-cert3"><img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=400&q=80" alt="Certificate 3"><div class="card-title">C++ Fundamentals</div></div>
+                <div class="certificates-grid">
+
+                    <div class="certificate-card" data-modal-target="#modal-cert5">
+                        <img src="Certificactes/saylor.png" alt="Computer Communication & Networks by saylor.org">
+                        <div class="certificate-info">
+                            <h3 class="certificate-title">Computer Communication & Networks </h3>
+                            <p class="certificate-provider">Saylor Academy • 2024</p>
+                            <button class="btn view-details-btn">View Certificate</button>
+                        </div>
+                    </div>
+                    <div class="certificate-card" data-modal-target="#modal-cert1">
+                        <img src="Certificactes/alison.jpg" alt="Workplace Communication by Alison">
+                        <div class="certificate-info">
+                            <h3 class="certificate-title">Workplace Communication</h3>
+                            <p class="certificate-provider">Alison • 2025</p>
+                            <button class="btn view-details-btn">View Certificate</button>
+                        </div>
+                    </div>
+                    <div class="certificate-card" data-modal-target="#modal-cert2">
+                        <img src="Certificactes/devtown.png" alt="Certificacte of Appreciation by Devtown">
+                        <div class="certificate-info">
+                            <h3 class="certificate-title">ertificacte of Appreciation by Devtown</h3>
+                            <p class="certificate-provider">devtown • 2025</p>
+                            <button class="btn view-details-btn">View Certificate</button>
+                        </div>
+                    </div>
+                    <div class="certificate-card" data-modal-target="#modal-cert3">
+                        <img src="Certificactes/freedon AI.png" alt="Completion of MasterClass">
+                        <div class="certificate-info">
+                            <h3 class="certificate-title">Completion of MasterClass</h3>
+                            <p class="certificate-provider">Freedom with AI • 2024</p>
+                            <button class="btn view-details-btn">View Certificate</button>
+                        </div>
+                    </div>
+                    <div class="certificate-card" data-modal-target="#modal-cert4">
+                        <img src="Certificactes/MJG CA.png" alt="Campus Ambassador Certificate ">
+                        <div class="certificate-info">
+                            <h3 class="certificate-title">Campus Ambassador Certificate </h3>
+                            <p class="certificate-provider">My Job Grow • 2025</p>
+                            <button class="btn view-details-btn">View Certificate</button>
+                        </div>
+                    </div>
+                    <div class="certificate-card" data-modal-target="#modal-cert6">
+                        <img src="Certificactes/outskill.png" alt="Completion of MasterClass">
+                        <div class="certificate-info">
+                            <h3 class="certificate-title">Completion of MasterClass</h3>
+                            <p class="certificate-provider">OutSkill • 2025</p>
+                            <button class="btn view-details-btn">View Certificate</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,12 +270,28 @@
                 <h2 class="section-title">Contact</h2>
                 <div id="contact-form-wrapper" class="animate-on-scroll">
                     <p class="contact-intro">Feel free to reach out for collaborations or just to say hello!</p>
-                    <form id="contact-form">
-                        <div class="form-group"><input type="text" name="name" required><label>Your Name</label></div>
-                        <div class="form-group"><input type="email" name="email" required><label>Your Email</label></div>
-                        <div class="form-group"><textarea name="message" rows="5" required></textarea><label>Your Message</label></div>
-                        <button type="submit" class="btn"><span>Send Message</span></button>
+                    <form id="contact-form" action="https://formspree.io/f/mrbarwzo" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" required>
+                            <label>Your Name</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" required>
+                            <label>Your Email</label>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" rows="5" required></textarea>
+                            <label>Your Message</label>
+                        </div>
+                        <button type="submit" class="btn send-btn"><span>Send Message</span></button>
                     </form>
+                    <p id="form-status"></p>
+                </div>
+                <div class="resume-btn-container">
+                    <a href="Assets/CV.pdf" class="btn resume-btn" target="_blank"
+                        download="Vishal_Kumar_Thakur's_Resume">
+                        <span>Download Resume</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -115,19 +299,240 @@
 
     <footer class="site-footer">
         <div class="container">
+            <div class="social-links-footer">
+                <a href="https://github.com/vishal-1307" target="_blank" aria-label="GitHub"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/vishalthakur13/" target="_blank" aria-label="LinkedIn"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/vishal_1307__/" target="_blank" aria-label="Instagram"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://x.com/Vishal_1315_" target="_blank" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://www.facebook.com/vishalthakur1307/" target="_blank" aria-label="Facebook"><i
+                        class="fab fa-facebook"></i></a>
+                <a href="https://www.threads.com/@vishalthakur_1307" target="_blank" aria-label="Threads"><i
+                        class="fab fa-threads"></i></a>
+            </div>
             <p>&copy; 2025 Vishal Kumar Thakur. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <div class="modal-overlay" id="modal-project1"></div>
-    <div class="modal-overlay" id="modal-project2"></div>
-    <div class="modal-overlay" id="modal-project3"></div>
-    <div class="modal-overlay" id="modal-cert1"></div>
-    <div class="modal-overlay" id="modal-cert2"></div>
-    <div class="modal-overlay" id="modal-cert3"></div>
-    
+    <div class="modal-overlay" id="modal-project1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Mithila Kritikala NGO Website</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Projects/mithilakritikala.png" alt="Mithila Kritikala Website Screenshot">
+                <p>This project is incredibly close to my heart as it brings to life the vision of Mithila Kritikala—an
+                    NGO dedicated to preserving the precious heritage of Mithila painting and sewing, while empowering
+                    rural women with skills for a sustainable livelihood. <br>
+                    I designed and developed this website to serve as the digital home for our mission. It acts as a
+                    global platform to showcase the intricate beauty of the art form and to share the powerful stories
+                    of the artisans behind it. Key features include an elegant gallery to display the artwork, detailed
+                    artist profiles that give a voice to our artisans, and a secure donation system to enable supporters
+                    to contribute to our cause. <br>
+                    Built from the ground up using HTML, CSS, and JavaScript, the site is crafted to be visually
+                    appealing and highly user-friendly. For me, this is more than just a project; it's a bridge between
+                    tradition and technology, built to empower a community and keep a beautiful cultural legacy alive.
+                </p>
+                <div class="modal-tags">
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">JavaScript</span>
+                </div>
+            </div>
+            <div class="modal-links">
+                <a href="https://mithilakritikala.com/" class="btn" target="_blank">Live Demo</a>
+                <a href="#" class="btn" target="_blank">View Code</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-project2">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Personal Portfolio</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Projects/portfolio.png" alt="Personal Portfolio Screenshot">
+                <p>I believe a developer's portfolio should be more than just a list of projects; it should be an
+                    experience in itself. With this philosophy, I designed and built my personal portfolio to serve as
+                    the digital front door to my professional world. The goal was to create a clean, modern, and
+                    intuitive space where I could showcase my skills, experience, and the projects I'm passionate about.
+                    <br>
+                    Focusing on modern design principles, I prioritized a minimalist aesthetic and a fully responsive
+                    user interface to ensure a seamless experience on any device, from desktops to mobile phones. I
+                    built the entire site from the ground up using core web technologies—HTML, CSS, and JavaScript—which
+                    gave me complete creative control over every pixel and interaction. This portfolio is a direct
+                    reflection of my skills and my passion for building beautiful, functional, and user-centric digital
+                    experiences.</p>
+                <div class="modal-tags">
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">JavaScript</span>
+                </div>
+            </div>
+            <div class="modal-links">
+                <a href="https://vishalkumarthakur.me/" class="btn" target="_blank">Live Demo</a>
+                <a href="#" class="btn" target="_blank">View Code</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-project3">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Student Information System</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Projects/Studentinfosys.png" alt="Student Information System Screenshot">
+                <p>As a hands-on initiative to apply and solidify my SQL knowledge, I developed this Student Information
+                    System project. The primary objective was to design and implement a robust and efficient relational
+                    database from the ground up to manage the core data of an educational institution. <br>
+                    The project involved creating a logical schema with interconnected tables for students, courses, and
+                    enrollments. I authored a variety of SQL queries to perform essential CRUD (Create, Read, Update,
+                    Delete) operations, effectively managing the flow of information within the system. This practical
+                    exercise was instrumental in deepening my understanding of data modeling, schema design, and the art
+                    of writing effective queries. <br>
+                    This project stands as a testament to my strong grasp of database management fundamentals and serves
+                    as a foundational milestone in my journey of building data-centric applications.</p>
+                <div class="modal-tags">
+                    <span class="tag">My SQL</span>
+                </div>
+            </div>
+            <div class="modal-links">
+                <a href="#" class="btn" target="_blank">Live Demo</a>
+                <a href="#" class="btn" target="_blank">View Code</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cert1">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Web Development Bootcamp</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Certificactes/alison.jpg" alt="Web Development Basics Certificate">
+                <p>Great ideas can only make an impact if they are communicated clearly and effectively. I pursued this
+                    course from Alison to sharpen my ability to convey complex thoughts in a professional setting. The
+                    training focused on the essential soft skills that foster collaboration, from writing clear and
+                    professional emails to building strong interpersonal relationships within a team. This certification
+                    reflects my commitment to being not just a skilled technician, but also an effective and
+                    collaborative team member.</p>
+            </div>
+            <div class="modal-links">
+                <a href="#" class="btn" target="_blank">View Certificate</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-cert2">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">JavaScript Algorithms</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Certificactes/devtown.png" alt="JavaScript Algorithms Certificate">
+                <p>AI'm a firm believer that we grow fastest when we grow together. Receiving this Certificate of
+                    Appreciation from Devtown was incredibly meaningful because it recognized my passion for community
+                    building. I actively contributed to helping our community thrive by supporting fellow members and
+                    fostering a collaborative environment. This isn't just an award; it's a reflection of my commitment
+                    to being a proactive team player who is always ready to help others succeed.</p>
+            </div>
+            <div class="modal-links">
+                <a href="#" class="btn" target="_blank">View Certificate</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-cert3">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">React Development</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Certificactes/freedon AI.png" alt="React Development Certificate">
+                <p>I've always been fascinated by how AI is changing our world, and I wanted to move beyond the hype to
+                    understand its practical power. This masterclass was the perfect opportunity to do just that. It
+                    equipped me with the skills to use various AI tools not just as novelties, but as powerful assets to
+                    boost productivity and automate complex tasks. This course truly demystified AI for me, giving me a
+                    strategic framework to apply artificial intelligence to solve real-world challenges creatively.
+
+                </p>
+            </div>
+            <div class="modal-links">
+                <a href="#" class="btn" target="_blank">View Certificate</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cert4">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Cybersecurity Fundamentals</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Certificactes/MJG CA.png" alt="Cybersecurity Fundamentals Certificate">
+                <p>I believe that true learning happens when you step out of your comfort zone, and the Campus
+                    Ambassador role for My Job Grow was a fantastic hands-on experience in leadership and marketing. For
+                    one month, I was the bridge between the brand and the student community, tasked with driving
+                    engagement and building awareness. This role taught me invaluable lessons in persuasion, public
+                    speaking, and community building, proving my ability to take initiative and lead with dedication.
+                </p>
+            </div>
+            <div class="modal-links">
+                <a href="#" class="btn" target="_blank">View Certificate</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-cert5">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Python for Everybody</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Certificactes/saylor.png" alt="Python for Everybody Certificate">
+                <p>To truly master technology, I believe it’s essential to understand the invisible architecture that
+                    powers it. This course from Saylor Academy allowed me to peel back the layers of the internet and
+                    digital communication. I explored the core principles of network architecture, data transmission,
+                    and protocols like TCP/IP that form the backbone of our digital world. This foundational knowledge
+                    allows me to approach technical challenges with a deeper, more comprehensive understanding.</p>
+            </div>
+            <div class="modal-links">
+                <a href="#" class="btn" target="_blank">View Certificate</a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="modal-cert6">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Python for Everybody</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img src="Certificactes/outskill.png" alt="Python for Everybody Certificate">
+                <p>To truly master technology, I believe it’s essential to understand the invisible architecture that
+                    powers it. This course from Saylor Academy allowed me to peel back the layers of the internet and
+                    digital communication. I explored the core principles of network architecture, data transmission,
+                    and protocols like TCP/IP that form the backbone of our digital world. This foundational knowledge
+                    allows me to approach technical challenges with a deeper, more comprehensive understanding.</p>
+            </div>
+            <div class="modal-links">
+                <a href="#" class="btn" target="_blank">View Certificate</a>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
