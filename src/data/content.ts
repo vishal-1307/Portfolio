@@ -134,16 +134,16 @@ export const projects: Project[] = [
     summary:
       "Astro + React storefront with a FastAPI RAG chatbot, live metal rates, and automated daily rate posts.",
     description:
-      "An Astro 5 + React + Tailwind jewellery storefront on Vercel, paired with a FastAPI RAG chatbot (Gemini 2.5-flash) that answers product and store queries. Includes a live gold & silver rates endpoint and automated daily rate social posts via GitHub Actions.",
+      "An Astro 5 + React + Tailwind v4 jewellery storefront on Vercel, paired with a FastAPI RAG chatbot that answers product and store queries — Google Gemini for generation over pgvector embeddings on Neon Postgres. Includes a live gold & silver rates endpoint and automated daily rate social posts via GitHub Actions.",
     highlights: [
-      "RAG chatbot (Gemini 2.5-flash) for product and store questions",
-      "Live gold & silver rates endpoint",
+      "RAG chatbot (Gemini) over pgvector embeddings on Neon Postgres",
+      "Live gold & silver rates endpoint, current with daily market rates",
       "Automated daily rate social posts via GitHub Actions",
     ],
     tags: ["Astro", "React", "FastAPI", "RAG", "Gemini"],
     image: "/projects/diamond-jewellers.png",
     status: "Live",
-    live: "", // TODO: add live URL
+    live: "https://diamond-jewellers.vercel.app",
     code: "", // TODO: add repo URL or set to "private"
   },
   {
@@ -162,7 +162,7 @@ export const projects: Project[] = [
     tags: ["React", "Tailwind", "Razorpay", "E-commerce"],
     image: "/projects/kalika-creation.png",
     status: "Live",
-    live: "", // TODO: add live URL
+    live: "https://kalika-creation.vercel.app",
     code: "", // TODO: add repo URL or set to "private"
   },
   {
@@ -172,17 +172,17 @@ export const projects: Project[] = [
     summary:
       "Computer-vision prototype that flags theft in real time and sends WhatsApp alerts — built for kirana stores.",
     description:
-      "A real-time theft detection prototype for small retail shops. Python with Roboflow hosted inference and Twilio WhatsApp alerts, designed for kirana (neighbourhood) stores with minimal hardware.",
+      "A real-time theft detection prototype for small retail shops. A YOLOv11 model trained and served via Roboflow, wired to instant Twilio WhatsApp alerts — designed for kirana (neighbourhood) stores with minimal hardware.",
     highlights: [
-      "Real-time inference via Roboflow hosted models",
-      "Instant Twilio WhatsApp alerts on detection",
+      "Real-time detection with a YOLOv11 model served via Roboflow",
+      "Instant Twilio WhatsApp alerts to store owners on detection",
       "Built for low-cost deployment in small shops",
     ],
-    tags: ["Python", "Computer Vision", "Roboflow", "Twilio"],
+    tags: ["Python", "YOLOv11", "Roboflow", "Twilio"],
     image: "/projects/ai-cctv.png",
     status: "Prototype",
     live: "",
-    code: "", // TODO: add repo URL or set to "private"
+    code: "private",
   },
   {
     id: "mithila-kritikala",
@@ -211,9 +211,12 @@ export const projects: Project[] = [
  * TODO: replace these placeholders with your real certificates.
  */
 export const certificates: Certificate[] = [
-  { title: "Certificate title", org: "Issuing organization", year: "2025" },
-  { title: "Certificate title", org: "Issuing organization", year: "2024" },
-  { title: "Certificate title", org: "Issuing organization", year: "2024" },
+  { title: "Computer Communication & Networks", org: "Saylor Academy", year: "2024" },
+  { title: "Workplace Communication", org: "Alison", year: "2025" },
+  { title: "Certificate of Appreciation", org: "DevTown", year: "2025" },
+  { title: "AI MasterClass", org: "Freedom with AI", year: "2024" },
+  { title: "Campus Ambassador", org: "My Job Grow", year: "2025" },
+  { title: "AI MasterClass", org: "OutSkill", year: "2025" },
 ];
 
 /* ─────────────────────────────── CONTACT ────────────────────────────── */
@@ -227,7 +230,7 @@ export const contact = {
 export const socials: Social[] = [
   { label: "GitHub", handle: "vishal-1307", href: "https://github.com/vishal-1307" },
   { label: "LinkedIn", handle: "vishalthakur13", href: "https://www.linkedin.com/in/vishalthakur13" },
-  { label: "Instagram", handle: "@vishal", href: "https://instagram.com/" }, // TODO: confirm Instagram handle/URL
-  { label: "X", handle: "Vishal_1315_", href: "https://x.com/Vishal_1315_" },
-  { label: "Threads", handle: "@vishal", href: "https://www.threads.net/" }, // TODO: confirm Threads handle/URL
+  { label: "Instagram", handle: "vishal_1307__", href: "https://instagram.com/vishal_1307__" },
+  { label: "X", handle: "vishal1307n", href: "https://x.com/vishal1307n" },
+  { label: "Threads", handle: "vishal_1307__", href: "https://www.threads.net/@vishal_1307__" },
 ];
