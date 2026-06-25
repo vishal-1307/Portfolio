@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Placeholder OG card. Export a 1200x630 PNG named og-image.png into /public
+       to replace it (the meta tags reference og-image.png). -->
+  <rect width="1200" height="630" fill="#0B0F14"/>
+  <defs>
+    <radialGradient id="g" cx="0%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.18"/>
+      <stop offset="55%" stop-color="#0B0F14" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#94A3B8" fill-opacity="0.06"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <text x="90" y="250" fill="#2DD4BF" font-family="monospace" font-size="24" letter-spacing="6">FULL-STACK · AI SYSTEMS · CYBERSECURITY</text>
+  <text x="86" y="360" fill="#E6EDF3" font-family="'Space Grotesk',sans-serif" font-size="92" font-weight="700">Vishal Kumar Thakur</text>
+  <text x="90" y="430" fill="#94A3B8" font-family="sans-serif" font-size="30">Building production apps, AI integrations &amp; automation.</text>
+  <rect x="90" y="500" width="56" height="56" rx="12" fill="none" stroke="#2DD4BF" stroke-opacity="0.4"/>
+  <path d="M104 516 L118 540 L132 516" fill="none" stroke="#2DD4BF" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
