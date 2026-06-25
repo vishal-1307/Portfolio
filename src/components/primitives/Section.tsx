@@ -12,21 +12,18 @@ type SectionProps = {
 };
 
 /**
- * Semantic section wrapper with consistent vertical rhythm, a labelled heading,
- * and scroll-margin so anchor navigation lands below the fixed navbar.
+ * Semantic section: a full-bleed top rule (the catalogue divider), the ledger
+ * heading, then content. scroll-mt keeps anchors clear of the fixed masthead.
  */
 export function Section({ id, index, kicker, title, description, children, className }: SectionProps) {
   return (
-    <section
-      id={id}
-      aria-labelledby={`${id}-title`}
-      className={cn("scroll-mt-24 py-section", className)}
-    >
-      <div className="container-page">
+    <section id={id} aria-labelledby={`${id}-title`} className={cn("scroll-mt-20", className)}>
+      <div className="rule" />
+      <div className="container-page pb-section">
         <div id={`${id}-title`}>
           <SectionHeading index={index} kicker={kicker} title={title} description={description} />
         </div>
-        {children}
+        <div className="mt-12 md:mt-16">{children}</div>
       </div>
     </section>
   );

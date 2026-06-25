@@ -5,15 +5,13 @@ import { Tag } from "@/components/primitives/Tag";
 import { ImageWithFallback } from "@/components/primitives/ImageWithFallback";
 import { Close, ArrowUpRight, Lock } from "@/components/primitives/icons";
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+const FOCUSABLE = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
 export function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const reduce = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
 
-  // Scroll lock + restore focus to the element that opened the modal.
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
     const prevOverflow = document.body.style.overflow;
@@ -25,7 +23,6 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
         onClose();
         return;
       }
-      // Focus trap
       if (e.key === "Tab" && panelRef.current) {
         const nodes = Array.from(panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE));
         if (nodes.length === 0) return;
@@ -54,7 +51,6 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
 
   return (
     <div className="fixed inset-0 z-[60] flex items-end justify-center sm:items-center">
-      {/* backdrop */}
       <motion.button
         type="button"
         aria-label="Close dialog"
@@ -62,7 +58,7 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 bg-bg/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-ink/45 backdrop-blur-sm"
       />
 
       <motion.div
@@ -70,18 +66,18 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
         role="dialog"
         aria-modal="true"
         aria-labelledby="project-modal-title"
-        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={reduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.98 }}
+        initial={reduce ? { opacity: 0 } : { opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={reduce ? { opacity: 0 } : { opacity: 0, y: 24 }}
         transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 max-h-[92svh] w-full max-w-3xl overflow-y-auto rounded-t-2xl border border-line/15 bg-surface shadow-lift sm:rounded-2xl"
+        className="relative z-10 max-h-[92svh] w-full max-w-3xl overflow-y-auto border border-ink bg-paper"
       >
         <button
           ref={closeRef}
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 z-20 grid h-9 w-9 place-items-center rounded-md border border-line/15 bg-bg/60 text-text backdrop-blur transition-colors hover:border-accent/50 hover:text-accent"
+          className="absolute right-4 top-4 z-20 grid h-9 w-9 place-items-center border border-ink bg-paper text-ink transition-colors hover:bg-ink hover:text-paper"
         >
           <Close className="h-5 w-5" />
         </button>
@@ -91,27 +87,27 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
           alt={`${project.name} — ${project.tagline}`}
           ratio="16 / 9"
           fallbackLabel={project.name.charAt(0)}
-          className="rounded-t-2xl"
+          className="border-b border-ink/15"
         />
 
         <div className="p-6 sm:p-8">
-          <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em]">
-            <span className="text-accent">{project.status}</span>
-            <span className="h-px w-6 bg-line/20" />
+          <div className="eyebrow flex items-center gap-3 text-accent-ink">
+            <span>{project.status}</span>
+            <span className="h-px w-6 bg-ink/25" />
             <span className="text-faint">{project.tagline}</span>
           </div>
 
-          <h3 id="project-modal-title" className="mt-3 font-display text-display-md font-semibold text-text">
+          <h3 id="project-modal-title" className="mt-3 font-display text-display-md font-extrabold text-ink">
             {project.name}
           </h3>
 
           <p className="mt-4 leading-relaxed text-muted">{project.description}</p>
 
-          <h4 className="mt-7 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">Highlights</h4>
+          <h4 className="eyebrow mt-7 text-accent-ink">Highlights</h4>
           <ul className="mt-3 space-y-2.5">
             {project.highlights.map((h) => (
-              <li key={h} className="flex gap-3 text-sm leading-relaxed text-text">
-                <span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+              <li key={h} className="flex gap-3 text-[15px] leading-relaxed text-ink">
+                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 bg-accent" />
                 {h}
               </li>
             ))}
@@ -124,13 +120,13 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
           </div>
 
           {(project.live || hasCode || codeIsPrivate) && (
-            <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-line/10 pt-6">
+            <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-ink/15 pt-6">
               {project.live && (
                 <a
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-y-0.5 motion-reduce:transform-none"
+                  className="inline-flex items-center gap-2 bg-ink px-4 py-2.5 text-sm font-semibold text-paper transition-colors hover:bg-accent"
                 >
                   Visit live site
                   <ArrowUpRight className="h-4 w-4" />
@@ -141,14 +137,14 @@ export function ProjectModal({ project, onClose }: { project: Project; onClose: 
                   href={project.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-line/20 px-4 py-2.5 text-sm font-semibold text-text transition-colors hover:border-accent/50 hover:text-accent"
+                  className="inline-flex items-center gap-2 border border-ink px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
                 >
                   View code
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               )}
               {codeIsPrivate && (
-                <span className="inline-flex items-center gap-2 rounded-md border border-line/15 px-4 py-2.5 font-mono text-xs text-faint">
+                <span className="inline-flex items-center gap-2 border border-ink/25 px-4 py-2.5 text-xs font-semibold uppercase tracking-wide text-faint">
                   <Lock className="h-4 w-4" />
                   Private repo
                 </span>

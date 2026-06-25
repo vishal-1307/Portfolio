@@ -2,18 +2,18 @@ import { cn } from "@/lib/cn";
 
 type CardProps = React.HTMLAttributes<HTMLElement> & {
   as?: "div" | "article" | "li";
-  /** Adds hover lift + accent hairline. Use for interactive cards. */
+  /** Adds hover treatment (ink border + slight lift). Use for interactive cards. */
   interactive?: boolean;
 };
 
-/** Surface container with a hairline border; optional hover treatment. */
+/** Square-cornered surface with a hairline border — Swiss editorial card. */
 export function Card({ as: Tag = "div", interactive = false, className, children, ...rest }: CardProps) {
   return (
     <Tag
       className={cn(
-        "relative rounded-card border border-line/12 bg-surface/70",
+        "relative border border-ink/15 bg-surface",
         interactive &&
-          "transition-[transform,border-color,box-shadow] duration-300 ease-emphatic hover:-translate-y-1 hover:border-accent/40 hover:shadow-lift motion-reduce:transform-none motion-reduce:transition-none",
+          "transition-[transform,border-color] duration-300 ease-emphatic hover:-translate-y-1 hover:border-ink motion-reduce:transform-none motion-reduce:transition-none",
         className,
       )}
       {...rest}

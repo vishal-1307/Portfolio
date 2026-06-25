@@ -10,7 +10,7 @@ import { Contact } from "@/components/sections/Contact";
 
 export default function App() {
   return (
-    <div className="grain relative min-h-screen">
+    <div className="relative min-h-screen">
       {/* Skip link for keyboard / screen-reader users */}
       <a
         href="#main"

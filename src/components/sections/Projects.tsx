@@ -11,10 +11,12 @@ import { ProjectModal } from "./ProjectModal";
 
 function ProjectCard({
   project,
+  number,
   featured,
   onOpen,
 }: {
   project: Project;
+  number: number;
   featured?: boolean;
   onOpen: () => void;
 }) {
@@ -26,7 +28,6 @@ function ProjectCard({
         interactive
         className={`group h-full overflow-hidden ${featured ? "md:grid md:grid-cols-2" : "flex flex-col"}`}
       >
-        {/* Whole card is a button for accessibility (keyboard-openable). */}
         <button
           type="button"
           onClick={onOpen}
@@ -34,27 +35,29 @@ function ProjectCard({
           className="absolute inset-0 z-10"
         />
 
-        <ImageWithFallback
-          src={project.image}
-          alt={`${project.name} — ${project.tagline}`}
-          ratio={featured ? "16 / 11" : "16 / 10"}
-          fallbackLabel={project.name.charAt(0)}
-          className={featured ? "md:h-full" : ""}
-          imgClassName="transition-transform duration-500 ease-emphatic group-hover:scale-[1.03] motion-reduce:transform-none"
-        />
+        <div className="order-2 overflow-hidden border-b border-ink/15 md:order-none md:border-b-0 md:border-r">
+          <ImageWithFallback
+            src={project.image}
+            alt={`${project.name} — ${project.tagline}`}
+            ratio={featured ? "16 / 11" : "16 / 10"}
+            fallbackLabel={project.name.charAt(0)}
+            className={featured ? "h-full" : ""}
+            imgClassName="transition-transform duration-500 ease-emphatic group-hover:scale-[1.03] motion-reduce:transform-none"
+          />
+        </div>
 
-        <div className="flex flex-1 flex-col p-6">
-          <div className="flex items-center gap-2.5 font-mono text-[11px] uppercase tracking-[0.16em]">
-            <span className="inline-flex items-center gap-1.5 text-accent">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+        <div className="order-1 flex flex-1 flex-col p-6 md:order-none md:p-8">
+          <div className="flex items-center justify-between">
+            <span className="font-display text-2xl font-black text-accent">{String(number).padStart(2, "0")}</span>
+            <span className="eyebrow flex items-center gap-2 text-muted">
+              {featured && <span className="bg-accent px-1.5 py-0.5 text-accent-foreground">Flagship</span>}
               {project.status}
             </span>
-            {featured && <span className="rounded border border-accent/30 px-1.5 py-0.5 text-accent">Flagship</span>}
           </div>
 
-          <h3 className="mt-3 font-display text-xl font-semibold text-text">{project.name}</h3>
-          <p className="mt-1 text-sm text-faint">{project.tagline}</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted">{project.summary}</p>
+          <h3 className="mt-4 font-display text-2xl font-extrabold leading-tight text-ink md:text-3xl">{project.name}</h3>
+          <p className="mt-1 text-sm font-medium text-faint">{project.tagline}</p>
+          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted">{project.summary}</p>
 
           <div className="mt-5 flex flex-wrap gap-2">
             {project.tags.map((t) => (
@@ -62,9 +65,9 @@ function ProjectCard({
             ))}
           </div>
 
-          <span className="mt-6 inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.16em] text-muted transition-colors group-hover:text-accent">
+          <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-colors group-hover:text-accent-ink">
             View case
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none" />
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:transform-none" />
           </span>
         </div>
       </Card>
@@ -89,12 +92,13 @@ export function Projects() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="grid gap-5 md:grid-cols-2"
+        className="grid grid-cols-1 gap-5 md:grid-cols-2"
       >
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <ProjectCard
             key={project.id}
             project={project}
+            number={i + 1}
             featured={project.featured}
             onOpen={() => setActive(project)}
           />

@@ -4,18 +4,16 @@ import { cn } from "@/lib/cn";
 type ImageWithFallbackProps = {
   src: string;
   alt: string;
-  /** CSS aspect-ratio, e.g. "16 / 10". Keeps layout stable before load. */
   ratio?: string;
-  /** Single letter/word shown in the fallback (e.g. project initial). */
   fallbackLabel: string;
   className?: string;
   imgClassName?: string;
 };
 
 /**
- * Renders an image inside a fixed-aspect box. If `src` is empty or fails to
- * load, it shows a tasteful charcoal→teal gradient with the project initial,
- * so the layout never looks broken before real screenshots are added.
+ * Image in a fixed-aspect box. If `src` is empty or fails, shows a paper panel
+ * with a faint grid and an oversized red initial — reads as an intentional
+ * placeholder, never a broken image.
  */
 export function ImageWithFallback({
   src,
@@ -29,31 +27,19 @@ export function ImageWithFallback({
   const showFallback = !src || failed;
 
   return (
-    <div
-      className={cn("relative overflow-hidden bg-surface-2", className)}
-      style={{ aspectRatio: ratio }}
-    >
+    <div className={cn("relative overflow-hidden bg-paper", className)} style={{ aspectRatio: ratio }}>
       {showFallback ? (
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            background:
-              "radial-gradient(120% 120% at 0% 0%, rgb(var(--accent) / 0.18), transparent 55%), linear-gradient(135deg, rgb(var(--surface-2)), rgb(var(--bg)))",
-          }}
-          role="img"
-          aria-label={alt}
-        >
-          {/* faint grid lines reinforce the engineered look */}
+        <div className="absolute inset-0 flex items-center justify-center bg-[rgb(244_242_236)]" role="img" aria-label={alt}>
           <div
             aria-hidden="true"
-            className="absolute inset-0 opacity-40"
+            className="absolute inset-0"
             style={{
               backgroundImage:
-                "linear-gradient(rgb(var(--line) / 0.06) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--line) / 0.06) 1px, transparent 1px)",
-              backgroundSize: "28px 28px",
+                "linear-gradient(rgb(var(--ink) / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--ink) / 0.05) 1px, transparent 1px)",
+              backgroundSize: "32px 32px",
             }}
           />
-          <span className="relative font-display text-5xl font-bold text-accent/70">{fallbackLabel}</span>
+          <span className="relative font-display text-6xl font-black text-accent/85">{fallbackLabel}</span>
         </div>
       ) : (
         <img

@@ -3,9 +3,11 @@
 A fast, accessible, static developer portfolio. Built with **Vite + React +
 TypeScript + Tailwind CSS + Framer Motion**, deploy-ready for **Vercel**.
 
-Design direction: *Engineered Terminal Editorial* — near-black charcoal base, a
-single electric-teal accent, monospace "system" metadata, hairline rules, and
-restrained motion. No purple-gradient template clichés.
+Design direction: *Swiss Editorial* — warm paper base, black ink, a single
+disciplined Swiss red. A visible column grid, full-width hairline rules with
+oversized red section numbers, an editorial masthead, and a heavy grotesque
+type system (**Archivo** display + **Hanken Grotesk** body). No dark-mode
+template clichés.
 
 ---
 
@@ -40,8 +42,8 @@ links are all plain data there. Re-theming (colors, fonts, spacing) lives in
 1. Drop screenshots into `public/projects/` using the names listed in
    `public/projects/README.md` (e.g. `hungriees.png`).
 2. They're referenced by the `image` field of each project in `content.ts`.
-3. Until an image exists, the card shows a tasteful teal gradient with the
-   project's initial — nothing ever looks broken.
+3. Until an image exists, the card shows a paper panel with a faint grid and a
+   red project initial — nothing ever looks broken.
 
 ### Add your résumé
 
@@ -121,7 +123,7 @@ tailwind.config.ts         Theme tokens (colors, fonts, spacing, motion)
 public/                    favicon, OG placeholder, resume.pdf, project images
 src/
   data/content.ts          ← all editable content
-  index.css                tokens, dot-grid/grain texture, a11y, reduced-motion
+  index.css                tokens, paper/ink/red theme, a11y, reduced-motion
   lib/                      motion variants, cn() helper
   hooks/useScrollSpy.ts     active-nav tracking
   components/

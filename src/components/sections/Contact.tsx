@@ -12,7 +12,7 @@ const ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT ?? "";
 const WEB3FORMS_KEY = import.meta.env.VITE_WEB3FORMS_KEY ?? "";
 
 const fieldClass =
-  "w-full rounded-md border border-line/15 bg-bg px-4 py-3 text-sm text-text placeholder:text-faint transition-colors focus:border-accent/60 focus:outline-none";
+  "w-full border border-ink/25 bg-surface px-4 py-3 text-sm text-ink placeholder:text-faint transition-colors focus:border-ink focus:outline-none";
 
 export function Contact() {
   const reduce = useReducedMotion();
@@ -24,9 +24,7 @@ export function Contact() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-
-    // Honeypot: real users never fill this hidden field.
-    if (data.get("botcheck")) return;
+    if (data.get("botcheck")) return; // honeypot
 
     const payload = {
       name: String(data.get("name") || ""),
@@ -35,8 +33,6 @@ export function Contact() {
       ...(WEB3FORMS_KEY ? { access_key: WEB3FORMS_KEY } : {}),
     };
 
-    // No endpoint configured → fall back to the user's mail client so the
-    // contact path always works, even before the form is wired up.
     if (!ENDPOINT) {
       const body = encodeURIComponent(`${payload.message}\n\n— ${payload.name} (${payload.email})`);
       window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
@@ -69,30 +65,30 @@ export function Contact() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="grid gap-12 md:grid-cols-[1fr_1.1fr] md:gap-16"
+        className="grid grid-cols-12 gap-x-6 gap-y-12"
       >
         {/* Left: blurb + direct links */}
-        <motion.div variants={item} className="space-y-8">
+        <motion.div variants={item} className="col-span-12 space-y-8 md:col-span-5">
           <p className="max-w-md text-lg leading-relaxed text-muted">{contact.blurb}</p>
 
           <div className="space-y-3">
             <a
               href={`mailto:${site.email}`}
-              className="group inline-flex items-center gap-3 text-text transition-colors hover:text-accent"
+              className="group inline-flex items-center gap-3 text-ink transition-colors hover:text-accent-ink"
             >
-              <span className="grid h-10 w-10 place-items-center rounded-md border border-line/15">
+              <span className="grid h-10 w-10 place-items-center border border-ink/25">
                 <Mail className="h-[18px] w-[18px]" />
               </span>
-              <span className="font-mono text-sm">{site.email}</span>
+              <span className="text-base font-medium">{site.email}</span>
             </a>
             <div>
               <a
                 href={site.resume}
                 download
-                className="inline-flex items-center gap-2 rounded-md border border-line/15 px-4 py-2.5 text-sm text-text transition-colors hover:border-accent/50 hover:text-accent"
+                className="inline-flex items-center gap-2 border border-ink px-4 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-paper"
               >
                 <Download className="h-4 w-4" />
-                Download Resume
+                Download Résumé
               </a>
             </div>
           </div>
@@ -104,7 +100,7 @@ export function Contact() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-line/15 px-3 py-2 text-sm text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                  className="inline-flex items-center gap-2 border border-ink/25 px-3 py-2 text-sm font-medium text-muted transition-colors hover:border-ink hover:text-ink"
                 >
                   <SocialIcon label={s.label} className="h-4 w-4" />
                   {s.label}
@@ -116,8 +112,7 @@ export function Contact() {
         </motion.div>
 
         {/* Right: form */}
-        <motion.form variants={item} onSubmit={handleSubmit} className="space-y-4" noValidate>
-          {/* honeypot (visually hidden, off accessibility tree) */}
+        <motion.form variants={item} onSubmit={handleSubmit} className="col-span-12 space-y-4 md:col-span-6 md:col-start-7" noValidate>
           <input
             type="text"
             name="botcheck"
@@ -129,13 +124,13 @@ export function Contact() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="name" className="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+              <label htmlFor="name" className="eyebrow mb-1.5 block text-muted">
                 Name
               </label>
               <input id="name" name="name" type="text" required autoComplete="name" className={fieldClass} placeholder="Your name" />
             </div>
             <div>
-              <label htmlFor="email" className="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+              <label htmlFor="email" className="eyebrow mb-1.5 block text-muted">
                 Email
               </label>
               <input id="email" name="email" type="email" required autoComplete="email" className={fieldClass} placeholder="you@email.com" />
@@ -143,7 +138,7 @@ export function Contact() {
           </div>
 
           <div>
-            <label htmlFor="message" className="mb-1.5 block font-mono text-[11px] uppercase tracking-[0.16em] text-muted">
+            <label htmlFor="message" className="eyebrow mb-1.5 block text-muted">
               Message
             </label>
             <textarea id="message" name="message" required rows={5} className={`${fieldClass} resize-y`} placeholder="What are you building?" />
@@ -153,16 +148,15 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === "sending"}
-              className="inline-flex items-center gap-2 rounded-md bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 motion-reduce:transform-none"
+              className="inline-flex items-center gap-2 bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status === "sending" ? "Sending…" : "Send message"}
               <ArrowUpRight className="h-4 w-4" />
             </button>
 
-            {/* Live region for status feedback */}
             <p aria-live="polite" className="text-sm">
-              {status === "success" && <span className="text-accent">Thanks — I’ll get back to you soon.</span>}
-              {status === "error" && <span className="text-red-400">Couldn’t send: {error}</span>}
+              {status === "success" && <span className="font-medium text-accent-ink">Thanks — I’ll get back to you soon.</span>}
+              {status === "error" && <span className="font-medium text-accent-ink">Couldn’t send: {error}</span>}
             </p>
           </div>
         </motion.form>

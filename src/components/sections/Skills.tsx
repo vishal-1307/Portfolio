@@ -21,15 +21,19 @@ export function Skills() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="grid gap-px overflow-hidden rounded-card border border-line/12 bg-line/10 sm:grid-cols-2 lg:grid-cols-3"
+        className="border-t border-ink/15"
       >
-        {skills.map((group) => (
-          <motion.div key={group.label} variants={item} className="bg-bg p-6">
-            <div className="flex items-baseline justify-between">
-              <h3 className="font-display text-base font-semibold text-text">{group.label}</h3>
-              <span className="font-mono text-[11px] text-faint">{String(group.items.length).padStart(2, "0")}</span>
+        {skills.map((group, i) => (
+          <motion.div
+            key={group.label}
+            variants={item}
+            className="grid grid-cols-12 items-start gap-x-6 gap-y-3 border-b border-ink/15 py-6"
+          >
+            <div className="col-span-12 flex items-baseline gap-3 md:col-span-3">
+              <span className="font-display text-sm font-extrabold text-accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="font-display text-lg font-extrabold text-ink">{group.label}</h3>
             </div>
-            <ul className="mt-4 flex flex-wrap gap-2">
+            <ul className="col-span-12 flex flex-wrap gap-2 md:col-span-9">
               {group.items.map((skill) => (
                 <li key={skill}>
                   <Tag>{skill}</Tag>

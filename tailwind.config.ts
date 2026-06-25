@@ -1,67 +1,63 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Central theme source of truth.
- * Re-theme the entire site from here — colors, fonts, spacing rhythm, radii.
- * Color tokens are wired to CSS variables defined in src/index.css so they can
- * also be referenced in raw CSS / inline styles when needed.
+ * Central theme source of truth — Swiss editorial system.
+ * Re-theme the whole site from here: paper/ink/red palette, grotesque type,
+ * grid rhythm, hairline rules. Color tokens map to CSS variables in index.css.
  */
 const config: Config = {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: "rgb(var(--bg) / <alpha-value>)",
+        paper: "rgb(var(--paper) / <alpha-value>)",
         surface: "rgb(var(--surface) / <alpha-value>)",
-        "surface-2": "rgb(var(--surface-2) / <alpha-value>)",
-        line: "rgb(var(--line) / <alpha-value>)",
-        text: "rgb(var(--text) / <alpha-value>)",
+        ink: "rgb(var(--ink) / <alpha-value>)",
         muted: "rgb(var(--muted) / <alpha-value>)",
         faint: "rgb(var(--faint) / <alpha-value>)",
+        line: "rgb(var(--line) / <alpha-value>)",
         accent: "rgb(var(--accent) / <alpha-value>)",
-        "accent-strong": "rgb(var(--accent-strong) / <alpha-value>)",
+        "accent-ink": "rgb(var(--accent-ink) / <alpha-value>)",
         "accent-foreground": "rgb(var(--accent-foreground) / <alpha-value>)",
       },
       fontFamily: {
-        display: ["'Space Grotesk'", "ui-sans-serif", "system-ui", "sans-serif"],
-        sans: ["'IBM Plex Sans'", "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ["'JetBrains Mono'", "ui-monospace", "SFMono-Regular", "monospace"],
+        // Archivo: heavy grotesque for display. Hanken Grotesk: clean body/labels.
+        display: ["'Archivo'", "ui-sans-serif", "system-ui", "sans-serif"],
+        sans: ["'Hanken Grotesk'", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       fontSize: {
-        // Fluid display sizes via clamp — scale gracefully from mobile to desktop.
-        "display-xl": ["clamp(2.75rem, 7vw, 5.5rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
-        "display-lg": ["clamp(2.25rem, 5vw, 3.75rem)", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
-        "display-md": ["clamp(1.75rem, 3.5vw, 2.5rem)", { lineHeight: "1.1", letterSpacing: "-0.015em" }],
+        // Fluid editorial display sizes.
+        "mega": ["clamp(3rem, 11vw, 9rem)", { lineHeight: "0.92", letterSpacing: "-0.03em" }],
+        "display-xl": ["clamp(2.5rem, 6vw, 4.5rem)", { lineHeight: "1.0", letterSpacing: "-0.025em" }],
+        "display-lg": ["clamp(2rem, 4.5vw, 3.25rem)", { lineHeight: "1.04", letterSpacing: "-0.02em" }],
+        "display-md": ["clamp(1.6rem, 3vw, 2.25rem)", { lineHeight: "1.08", letterSpacing: "-0.015em" }],
+        "index": ["clamp(2.5rem, 6vw, 5rem)", { lineHeight: "0.85", letterSpacing: "-0.02em" }],
       },
       maxWidth: {
-        content: "72rem",
+        content: "80rem",
       },
       spacing: {
-        section: "clamp(5rem, 10vw, 9rem)",
+        section: "clamp(4.5rem, 9vw, 8rem)",
       },
       borderRadius: {
-        card: "0.875rem",
-      },
-      boxShadow: {
-        lift: "0 18px 50px -24px rgb(0 0 0 / 0.7)",
-        "accent-glow": "0 0 0 1px rgb(var(--accent) / 0.35), 0 18px 60px -28px rgb(var(--accent) / 0.35)",
+        card: "0",
       },
       transitionTimingFunction: {
         emphatic: "cubic-bezier(0.16, 1, 0.3, 1)",
       },
       keyframes: {
         "fade-up": {
-          from: { opacity: "0", transform: "translateY(12px)" },
+          from: { opacity: "0", transform: "translateY(14px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        drift: {
-          "0%, 100%": { transform: "translate3d(0, 0, 0)" },
-          "50%": { transform: "translate3d(0, -14px, 0)" },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
       },
       animation: {
         "fade-up": "fade-up 0.6s var(--ease-emphatic) both",
-        drift: "drift 16s ease-in-out infinite",
+        marquee: "marquee 28s linear infinite",
       },
     },
   },

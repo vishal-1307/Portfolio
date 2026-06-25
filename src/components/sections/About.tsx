@@ -14,26 +14,30 @@ export function About() {
         initial="hidden"
         whileInView="show"
         viewport={viewportOnce}
-        className="grid gap-12 md:grid-cols-[1.6fr_1fr] md:gap-16"
+        className="grid grid-cols-12 gap-x-6 gap-y-10"
       >
-        <div className="space-y-5">
+        <div className="col-span-12 space-y-6 md:col-span-7">
           {about.paragraphs.map((p, i) => (
             <motion.p
               key={i}
               variants={item}
-              className={i === 0 ? "text-lg leading-relaxed text-text" : "leading-relaxed text-muted"}
+              className={
+                i === 0
+                  ? "font-display text-display-md font-extrabold leading-tight text-ink"
+                  : "max-w-xl text-lg leading-relaxed text-muted"
+              }
             >
               {p}
             </motion.p>
           ))}
         </div>
 
-        {/* spec sheet — mono key/value pairs */}
-        <motion.dl variants={item} className="h-fit divide-y divide-line/10 rounded-card border border-line/12 bg-surface/60">
+        {/* spec sheet */}
+        <motion.dl variants={item} className="col-span-12 self-start md:col-span-4 md:col-start-9">
           {about.facts.map((fact) => (
-            <div key={fact.label} className="flex flex-col gap-1 p-5">
-              <dt className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">{fact.label}</dt>
-              <dd className="text-sm text-text">{fact.value}</dd>
+            <div key={fact.label} className="border-t border-ink/15 py-4 first:border-t-0 md:first:border-t">
+              <dt className="eyebrow text-accent-ink">{fact.label}</dt>
+              <dd className="mt-1.5 text-base font-medium text-ink">{fact.value}</dd>
             </div>
           ))}
         </motion.dl>
