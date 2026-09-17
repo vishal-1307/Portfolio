@@ -1,140 +1,109 @@
 # Vishal Kumar Thakur — Portfolio
 
-A fast, accessible, static developer portfolio. Built with **Vite + React +
-TypeScript + Tailwind CSS + Framer Motion**, deploy-ready for **Vercel**.
+Personal site. Next.js App Router, TypeScript, Tailwind v4, React Three Fiber
+for the hero lattice, Motion for scroll reveals. Static output, deployed on
+Vercel at **[vishalthakur.tech](https://vishalthakur.tech)**.
 
-Design direction: *Swiss Editorial* — warm paper base, black ink, a single
-disciplined Swiss red. A visible column grid, full-width hairline rules with
-oversized red section numbers, an editorial masthead, and a heavy grotesque
-type system (**Archivo** display + **Hanken Grotesk** body). No dark-mode
-template clichés.
+Design direction: *dark editorial* — ink page, warm paper type, one disciplined
+Swiss red, a hairline column grid, and oversized red section numerals. Archivo
+for display, Hanken Grotesk for body.
 
 ---
 
-## Run it locally
+## Run it
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
+npm run dev      # http://localhost:3000
 ```
 
-Other scripts:
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Dev server |
+| `npm run build` | Production build (type-checked) |
+| `npm start` | Serve the production build |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | `tsc --noEmit` |
+
+---
+
+## Editing content
+
+**You should never need to open a component to change wording.** All copy lives
+in `src/content/`:
+
+| File | Holds |
+| --- | --- |
+| `site.ts` | Name, title, email, domain, résumé path, social links, nav |
+| `hero.ts` | Hero copy, the spec list, the marquee, and the four proof stats |
+| `about.ts` | About paragraphs and the spec sheet |
+| `projects.ts` | The six case studies, plus the "Also built" entries |
+| `founder.ts` | Mithila KritiKala — copy, registration facts, stats |
+| `skills.ts` | Stack groups (the Security group is flagged `emphasis: true`) |
+| `contact.ts` | Contact heading, blurb, availability line |
+
+### Adding or changing a project
+
+Add an object to `projects` in `src/content/projects.ts`. The fields that matter:
+
+- `live` — a URL, or `""` to hide the button.
+- `repo` — a URL, `"private"` for a locked badge, or `""` to hide it entirely.
+- `visual` — `"image"` reads `/public/projects/<id>.webp`; `"diagram"` renders
+  the drawn SVG keyed by `id` in `src/components/sections/ProjectVisual.tsx`.
+- `hard` — the build-notes list. This is the part worth writing carefully: it is
+  what separates a case study from a link.
+
+Screenshots are 1600×1000 WebP. Anything without a public UI gets a drawn
+diagram rather than a placeholder.
+
+### Re-theming
+
+Colours, type scale and spacing are CSS variables in the `@theme` block at the
+top of `app/globals.css`. Every colour there is contrast-checked against the ink
+background; the comment records the ratios. Note the split: `accent` (#E5123B)
+is for fills and oversized numerals, `accent-soft` (#FF4D6D) is for red text,
+because the darker red does not clear 4.5:1 at body size.
+
+---
+
+## The hero lattice
+
+`src/components/hero/` has three pieces:
+
+- `Hero.tsx` — server component. The headline is in the initial HTML, so the
+  largest paint is text and the canvas never sits on the critical path.
+- `HeroVisual.tsx` — the gate. Loads the 3D chunk via `next/dynamic` only after
+  the browser goes idle, and only when `useRender3D()` says yes.
+- `HeroScene.tsx` — the WebGL scene. Nodes and edges share one vertex shader, so
+  displacement is a pure function of position and they stay welded: two draw
+  calls, no lights, no post-processing.
+- `HeroFallback.tsx` — a static SVG lattice, no JavaScript.
+
+The fallback renders instead of WebGL when the visitor requests reduced motion,
+has Data Saver on, is on a very low-memory device, or has no WebGL context. The
+render loop also stops completely when the hero scrolls out of view or the tab
+is backgrounded.
+
+three.js is a separate lazy chunk — confirm with:
 
 ```bash
-npm run build    # type-check + production build → dist/
-npm run preview  # serve the production build locally
+npm run build && curl -s http://localhost:3000/ | grep -c three
 ```
 
 ---
 
-## Edit your content (no JSX needed)
+## Contact form
 
-Everything you'll want to change lives in **one file**:
-
-> `src/data/content.ts`
-
-Sections, the about copy, skills groups, projects, certificates, and social
-links are all plain data there. Re-theming (colors, fonts, spacing) lives in
-**`tailwind.config.ts`** and the CSS variables at the top of **`src/index.css`**.
-
-### Add project images
-
-1. Drop screenshots into `public/projects/` using the names listed in
-   `public/projects/README.md` (e.g. `hungriees.png`).
-2. They're referenced by the `image` field of each project in `content.ts`.
-3. Until an image exists, the card shows a paper panel with a faint grid and a
-   red project initial — nothing ever looks broken.
-
-### Add your résumé
-
-Replace the placeholder **`public/resume.pdf`** with your real CV (keep the same
-filename, or update `site.resume` in `content.ts`).
-
-### Fill in the gaps
-
-Search `content.ts` for `TODO` — these are the live/code URLs, the real
-certificate list, and the Instagram/Threads handles. Any link left as `""` is
-hidden automatically, so you can fill them in whenever. Set a project's `code`
-to `"private"` to show a "Private repo" note instead of a link.
+Works with no configuration: with no endpoint set it composes a `mailto:`. To
+collect submissions instead, copy `.env.example` to `.env.local` and set
+`NEXT_PUBLIC_CONTACT_ENDPOINT` (Web3Forms or Formspree). There are no server
+secrets in this project.
 
 ---
 
-## Wire up the contact form
+## Deploying
 
-The form posts to an endpoint from an env var. With no endpoint set, it falls
-back to opening the visitor's mail client — so it works out of the box.
-
-1. Copy the env template:
-   ```bash
-   cp .env.example .env
-   ```
-2. Pick a provider and fill in `.env`:
-
-   **Web3Forms** (free, no account needed — https://web3forms.com)
-   ```env
-   VITE_CONTACT_ENDPOINT=https://api.web3forms.com/submit
-   VITE_WEB3FORMS_KEY=your-access-key
-   ```
-
-   **Formspree** (https://formspree.io)
-   ```env
-   VITE_CONTACT_ENDPOINT=https://formspree.io/f/your-form-id
-   ```
-3. Restart `npm run dev` so Vite picks up the new env values.
-
-> Note: `VITE_`-prefixed vars are bundled into the client. That's expected here —
-> a Web3Forms access key / Formspree form id are meant to be public.
-
----
-
-## Deploy to Vercel
-
-The repo includes `vercel.json`, so Vercel auto-detects everything.
-
-**Option A — Dashboard**
-1. Push this folder to a GitHub repo.
-2. On [vercel.com](https://vercel.com) → **Add New → Project** → import the repo.
-3. Framework preset: **Vite** (auto-detected). Build: `npm run build`, Output:
-   `dist` (already set in `vercel.json`).
-4. Add Environment Variables: `VITE_CONTACT_ENDPOINT` (and `VITE_WEB3FORMS_KEY`
-   if using Web3Forms).
-5. **Deploy.**
-
-**Option B — CLI**
-```bash
-npm i -g vercel
-vercel            # preview deploy (follow the prompts)
-vercel --prod     # production deploy
-```
-Set env vars once with `vercel env add VITE_CONTACT_ENDPOINT` (repeat for the
-key), or add them in the project's dashboard settings.
-
-After deploying, update the canonical/OG URLs in `index.html` if your final
-domain differs from `vishalkumarthakur.me`, and replace `public/og-image.svg`
-with a real `public/og-image.png` (1200×630) for link previews.
-
----
-
-## Project structure
-
-```
-index.html                 SEO/OG/Twitter meta, favicon, JSON-LD Person
-tailwind.config.ts         Theme tokens (colors, fonts, spacing, motion)
-public/                    favicon, OG placeholder, resume.pdf, project images
-src/
-  data/content.ts          ← all editable content
-  index.css                tokens, paper/ink/red theme, a11y, reduced-motion
-  lib/                      motion variants, cn() helper
-  hooks/useScrollSpy.ts     active-nav tracking
-  components/
-    primitives/            Section, Card, Tag, SectionHeading, ImageWithFallback, icons
-    layout/                Navbar, Footer, Background
-    sections/              Hero, About, Skills, Projects, ProjectModal, Certificates, Contact
-```
-
-## Accessibility & performance
-
-- Semantic landmarks, skip link, labelled controls, visible focus rings.
-- Keyboard-navigable nav, mobile menu, and project modal (focus trap + Esc).
-- Full `prefers-reduced-motion` support (Framer + a CSS safety net).
-- Self-hosted fonts, lazy-loaded images, graceful image fallbacks.
+Pushes to `main` deploy through Vercel. The production domain is
+`vishalthakur.tech`; `site.url` in `src/content/site.ts` feeds the canonical
+URL, Open Graph tags, sitemap and JSON-LD, so change it there if the domain
+ever moves.

@@ -3,28 +3,33 @@ node_modules
 .pnp
 .pnp.js
 
-# build output
+# next.js
+.next
+out
+next-env.d.ts
+
+# production
+build
 dist
-dist-ssr
-*.local
-*.tsbuildinfo
 
 # env
 .env
 .env.*
 !.env.example
 
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+
 # editor / os
 .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
 Thumbs.db
+*.sw?
 
 # logs
 npm-debug.log*
