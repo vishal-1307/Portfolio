@@ -13,14 +13,15 @@ export const site = {
   name: "Vishal Kumar Thakur",
   shortName: "Vishal Thakur",
   initials: "VT",
-  title: "Full-Stack Developer & Founder",
+  title: "Full-Stack AI Developer",
   domain: "vishalthakur.tech",
   url: "https://vishalthakur.tech",
   email: "thakurvishal1307@gmail.com",
   resume: "/resume.pdf",
   repo: "https://github.com/vishal-1307/Portfolio",
   description:
-    "Vishal Kumar Thakur builds production apps solo — payments, auth and security hardening included — and runs a registered charitable trust in Mithila.",
+    "Vishal Kumar Thakur is a full-stack AI developer studying BCA (Cybersecurity) at Lovely Professional University. He builds production apps and founded Mithila KritiKala, a registered charitable trust in Bihar.",
+  location: "Benipatti, Madhubani, Bihar",
 } as const;
 
 export const socials: Social[] = [
@@ -32,9 +33,11 @@ export const socials: Social[] = [
 ];
 
 export const nav = [
-  { id: "about", label: "About" },
+  { id: "now", label: "Now" },
   { id: "work", label: "Work" },
-  { id: "founder", label: "Founder" },
-  { id: "stack", label: "Stack" },
+  { id: "more", label: "More" },
+  { id: "impact", label: "Impact" },
+  { id: "skills", label: "Skills" },
+  { id: "activity", label: "Activity" },
   { id: "contact", label: "Contact" },
 ] as const;

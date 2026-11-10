@@ -1,12 +1,12 @@
 # Vishal Kumar Thakur — Portfolio
 
-Personal site. Next.js App Router, TypeScript, Tailwind v4, React Three Fiber
-for the hero lattice, Motion for scroll reveals. Static output, deployed on
-Vercel at **[vishalthakur.tech](https://vishalthakur.tech)**.
+Personal site. Next.js App Router, TypeScript, Tailwind v4. Static output,
+deployed on Vercel at **[vishalthakur.tech](https://vishalthakur.tech)**.
 
-Design direction: *dark editorial* — ink page, warm paper type, one disciplined
-Swiss red, a hairline column grid, and oversized red section numerals. Archivo
-for display, Hanken Grotesk for body.
+Dark by default, with a light-mode toggle. Instrument Serif for display,
+Geist for UI, a saffron accent. The hero is typographic (no portrait): an
+aurora, grain, and a cursor spotlight. `Cmd`/`Ctrl`+`K` opens a command
+palette. Motion is skipped when the visitor asks for reduced motion.
 
 ---
 
@@ -29,81 +29,35 @@ npm run dev      # http://localhost:3000
 
 ## Editing content
 
-**You should never need to open a component to change wording.** All copy lives
-in `src/content/`:
+Copy lives in `src/content/`. Components only render it.
 
 | File | Holds |
 | --- | --- |
-| `site.ts` | Name, title, email, domain, résumé path, social links, nav |
-| `hero.ts` | Hero copy, the spec list, the marquee, and the four proof stats |
-| `about.ts` | About paragraphs and the spec sheet |
-| `projects.ts` | The six case studies, plus the "Also built" entries |
-| `founder.ts` | Mithila KritiKala — copy, registration facts, stats |
-| `skills.ts` | Stack groups (the Security group is flagged `emphasis: true`) |
-| `contact.ts` | Contact heading, blurb, availability line |
+| `site.ts` | Name, title, email, domain, résumé, social links, nav |
+| `hero.ts` | Role line, intro, and the fact rows under the hero |
+| `projects.ts` | Selected work, then the smaller projects |
+| `founder.ts` | Mithila KritiKala — copy and registration facts |
+| `skills.ts` | Frontend, backend, AI, and security groups |
+| `activity.ts` | Community and programmes, names only |
+| `contact.ts` | Contact blurb and availability line |
 
-### Adding or changing a project
+A project with no `summary`, `live`, `repo`, or `image` renders as a name.
+Leave those fields off rather than inventing them. Screenshots are 1600×1000
+WebP in `public/projects/`, displayed in full through `next/image` (no crop).
 
-Add an object to `projects` in `src/content/projects.ts`. The fields that matter:
-
-- `live` — a URL, or `""` to hide the button.
-- `repo` — a URL, `"private"` for a locked badge, or `""` to hide it entirely.
-- `visual` — `"image"` reads `/public/projects/<id>.webp`; `"diagram"` renders
-  the drawn SVG keyed by `id` in `src/components/sections/ProjectVisual.tsx`.
-- `hard` — the build-notes list. This is the part worth writing carefully: it is
-  what separates a case study from a link.
-
-Screenshots are 1600×1000 WebP. Anything without a public UI gets a drawn
-diagram rather than a placeholder.
-
-### Re-theming
-
-Colours, type scale and spacing are CSS variables in the `@theme` block at the
-top of `app/globals.css`. Every colour there is contrast-checked against the ink
-background; the comment records the ratios. Note the split: `accent` (#E5123B)
-is for fills and oversized numerals, `accent-soft` (#FF4D6D) is for red text,
-because the darker red does not clear 4.5:1 at body size.
+`repo` is a URL, `"private"`, or omitted. `live` is a URL or omitted.
 
 ---
 
-## The hero lattice
+## Theme
 
-`src/components/hero/` has three pieces:
-
-- `Hero.tsx` — server component. The headline is in the initial HTML, so the
-  largest paint is text and the canvas never sits on the critical path.
-- `HeroVisual.tsx` — the gate. Loads the 3D chunk via `next/dynamic` only after
-  the browser goes idle, and only when `useRender3D()` says yes.
-- `HeroScene.tsx` — the WebGL scene. Nodes and edges share one vertex shader, so
-  displacement is a pure function of position and they stay welded: two draw
-  calls, no lights, no post-processing.
-- `HeroFallback.tsx` — a static SVG lattice, no JavaScript.
-
-The fallback renders instead of WebGL when the visitor requests reduced motion,
-has Data Saver on, is on a very low-memory device, or has no WebGL context. The
-render loop also stops completely when the hero scrolls out of view or the tab
-is backgrounded.
-
-three.js is a separate lazy chunk — confirm with:
-
-```bash
-npm run build && curl -s http://localhost:3000/ | grep -c three
-```
-
----
-
-## Contact form
-
-Works with no configuration: with no endpoint set it composes a `mailto:`. To
-collect submissions instead, copy `.env.example` to `.env.local` and set
-`NEXT_PUBLIC_CONTACT_ENDPOINT` (Web3Forms or Formspree). There are no server
-secrets in this project.
+Colours are CSS variables on `:root`, swapped by `data-theme` on `<html>`.
+Dark is the default. The choice is stored in `localStorage` under `theme`.
 
 ---
 
 ## Deploying
 
 Pushes to `main` deploy through Vercel. The production domain is
-`vishalthakur.tech`; `site.url` in `src/content/site.ts` feeds the canonical
-URL, Open Graph tags, sitemap and JSON-LD, so change it there if the domain
-ever moves.
+`vishalthakur.tech`. `site.url` in `src/content/site.ts` feeds the canonical
+URL, Open Graph tags, sitemap, and JSON-LD.

@@ -4,29 +4,26 @@ import { useEffect, useState } from "react";
 import { nav, site } from "@/content/site";
 import { useScrollSpy } from "@/lib/use-scroll-spy";
 import { cn } from "@/lib/cn";
-import { ArrowUpRight, Close, Menu } from "@/components/ui/icons";
+import { Close, Menu } from "@/components/ui/icons";
+import { ThemeToggle } from "./ThemeToggle";
+import { OPEN_COMMAND } from "./CommandPalette";
+import { AnimatePresence, motion } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
-const ids = nav.map((n) => n.id);
+const ids = nav.map((item) => item.id);
+const pill = nav.filter((item) => ["now", "work", "impact", "contact"].includes(item.id));
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const reduce = usePrefersReducedMotion();
   const [open, setOpen] = useState(false);
   const active = useScrollSpy(ids);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Lock the page behind the open mobile sheet, and close it on Escape.
-  useEffect(() => {
     if (!open) return;
     const previous = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => {
@@ -36,115 +33,92 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || open
-          ? "border-b border-paper/12 bg-ink/85 backdrop-blur-md"
-          : "border-b border-transparent",
-      )}
-    >
-      <nav className="container-page flex h-16 items-center justify-between" aria-label="Primary">
-        {/* The accessible name opens with the visible text, so speech input
-            ("click V T") matches what is on screen — WCAG 2.5.3 Label in Name. */}
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className="container-page pointer-events-auto relative z-10 flex items-center justify-between gap-2 pt-3">
         <a
           href="#top"
-          className="inline-flex items-center py-2 font-display text-lg font-extrabold tracking-tight text-paper"
-          aria-label={`${site.initials} — ${site.name}, back to top`}
+          className="relative z-10 inline-flex h-12 max-w-[40vw] items-center truncate rounded-full border border-line bg-bg/80 px-4 font-serif text-lg tracking-tight text-fg backdrop-blur-md sm:max-w-none"
         >
-          {site.initials}
-          <span className="text-accent-soft">.</span>
+          <span className="sm:hidden">Vishal</span>
+          <span className="hidden sm:inline">{site.shortName}</span>
         </a>
 
-        <ul className="hidden items-center gap-7 md:flex">
-          {nav.map((item, i) => {
+        <nav
+          aria-label="Primary"
+          className="hidden items-center gap-1 rounded-full border border-line bg-bg/75 px-1.5 py-1 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:flex"
+        >
+          {pill.map((item) => {
             const isActive = active === item.id;
             return (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  aria-current={isActive ? "true" : undefined}
-                  // py-2 keeps the hit area at the 24px WCAG 2.5.8 minimum
-                  // without changing how the row looks.
-                  className={cn(
-                    "group relative inline-flex items-baseline gap-1.5 py-2 text-sm font-medium transition-colors",
-                    isActive ? "text-paper" : "text-muted hover:text-paper",
-                  )}
-                >
-                  <span aria-hidden="true" className="text-[10px] font-semibold text-accent-soft">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  {item.label}
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute -bottom-0.5 left-0 h-px bg-accent-soft transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
-                      isActive ? "w-full" : "w-0 group-hover:w-full",
-                    )}
-                  />
-                </a>
-              </li>
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={isActive ? "true" : undefined}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-sm transition-colors",
+                  isActive ? "bg-fg text-bg" : "text-muted hover:text-fg",
+                )}
+              >
+                {item.label}
+              </a>
             );
           })}
-        </ul>
+        </nav>
 
-        <div className="flex items-center gap-2">
-          <a
-            href={site.resume}
-            download
-            className="hidden items-center gap-1.5 border border-paper/35 px-3.5 py-2 text-sm font-semibold text-paper transition-colors hover:border-paper hover:bg-paper hover:text-ink md:inline-flex"
-          >
-            Résumé
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-
+        <div className="flex items-center gap-1 rounded-full border border-line bg-bg/75 p-1 backdrop-blur-md">
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => window.dispatchEvent(new Event(OPEN_COMMAND))}
+            aria-label="Open command palette"
+            className="inline-flex h-10 items-center gap-2 rounded-full px-2.5 text-xs font-medium text-muted transition-colors hover:text-fg"
+          >
+            <span className="hidden sm:inline">Search</span>
+            <kbd className="rounded-md border border-line px-1.5 py-0.5 font-mono text-[10px] text-faint">⌘K</kbd>
+          </button>
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="grid h-10 w-10 place-items-center border border-paper/35 text-paper md:hidden"
+            className="grid size-10 place-items-center rounded-full text-fg lg:hidden"
           >
-            {open ? <Close className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? <Close className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
-      </nav>
+      </div>
 
-      {open ? (
-        <div id="mobile-menu" className="border-b border-paper/12 bg-ink md:hidden">
-            <ul className="container-page flex flex-col py-2">
-              {nav.map((item, i) => (
-                <li key={item.id} className="border-t border-paper/10 first:border-t-0">
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            id="mobile-menu"
+            initial={reduce ? false : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: reduce ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="pointer-events-auto fixed inset-x-0 top-0 bottom-0 overflow-y-auto bg-bg px-6 pt-24 lg:hidden"
+          >
+            <ul className="flex flex-col">
+              {nav.map((item, index) => (
+                <li key={item.id} className="border-b border-line">
                   <a
                     href={`#${item.id}`}
                     onClick={() => setOpen(false)}
-                    className={cn(
-                      "flex items-baseline gap-3 py-4 font-display text-xl font-extrabold",
-                      active === item.id ? "text-accent-soft" : "text-paper",
-                    )}
+                    aria-current={active === item.id ? "true" : undefined}
+                    className="flex items-baseline justify-between py-4"
                   >
-                    <span aria-hidden="true" className="text-xs font-semibold text-accent-soft">
-                      {String(i + 1).padStart(2, "0")}
+                    <span className="font-serif text-4xl tracking-tight text-fg">{item.label}</span>
+                    <span className="font-mono text-xs text-accent tabular">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    {item.label}
                   </a>
                 </li>
               ))}
-              <li className="border-t border-paper/10 py-4">
-                <a
-                  href={site.resume}
-                  download
-                  onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-2 border border-paper/35 px-4 py-2.5 text-sm font-semibold text-paper"
-                >
-                  Download résumé
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              </li>
             </ul>
-        </div>
-      ) : null}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

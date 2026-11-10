@@ -1,25 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Hanken_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { site, socials } from "@/content/site";
 import { founder } from "@/content/founder";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { GridBackdrop } from "@/components/layout/GridBackdrop";
 import { ScrollReveal } from "@/components/layout/ScrollReveal";
+import { Spotlight } from "@/components/layout/Spotlight";
+import { CommandPalette } from "@/components/layout/CommandPalette";
 import "./globals.css";
 
-const archivo = Archivo({
+const geist = Geist({
   subsets: ["latin"],
-  weight: ["700", "800", "900"],
-  variable: "--font-archivo",
+  variable: "--font-geist",
   display: "swap",
 });
 
-const hanken = Hanken_Grotesk({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-hanken",
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
 });
 
@@ -32,18 +39,18 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: site.description,
-  applicationName: site.name,
+  applicationName: site.shortName,
   authors: [{ name: site.name, url: site.url }],
   creator: site.name,
   keywords: [
     "Vishal Kumar Thakur",
-    "full-stack developer",
-    "Next.js developer India",
-    "React Native developer",
+    "full-stack AI developer",
+    "Next.js",
+    "React Native",
     "FastAPI",
-    "application security",
-    "freelance developer Bihar",
+    "cybersecurity",
     "Mithila KritiKala",
+    "Bihar",
   ],
   alternates: { canonical: "/" },
   openGraph: {
@@ -68,11 +75,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0b0b0c",
-  colorScheme: "dark",
+  themeColor: "#100e0c",
+  colorScheme: "dark light",
+  width: "device-width",
+  initialScale: 1,
 };
 
-/** Person + the trust, so search engines connect the founder claim to an org. */
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -83,7 +91,7 @@ const jsonLd = {
   description: site.description,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Madhubani",
+    addressLocality: "Benipatti",
     addressRegion: "Bihar",
     addressCountry: "IN",
   },
@@ -93,11 +101,11 @@ const jsonLd = {
   },
   knowsAbout: [
     "Full-stack development",
+    "Artificial intelligence",
     "Next.js",
     "React Native",
     "FastAPI",
     "Application security",
-    "Retrieval-augmented generation",
   ],
   founder: {
     "@type": "NGO",
@@ -109,36 +117,34 @@ const jsonLd = {
   sameAs: socials.map((s) => s.href),
 };
 
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t="dark";var r=document.documentElement;r.setAttribute("data-theme",t);r.style.colorScheme=t;var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="light"?"#fbf6ef":"#100e0c");}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${hanken.variable}`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${geist.variable} ${geistMono.variable} ${serif.variable}`}
+    >
       <head>
-        {/* Marks the document as script-capable before first paint. The
-            scroll-reveal styles are scoped to `.js`, so with JavaScript
-            disabled no content is ever left hidden at opacity 0. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `document.documentElement.classList.add('js')`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-accent-foreground"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-fg focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-bg"
         >
           Skip to content
         </a>
-
-        <GridBackdrop />
+        <Spotlight />
         <ScrollReveal />
         <Navbar />
+        <CommandPalette />
         <main id="main">{children}</main>
         <Footer />
-
         <script
           type="application/ld+json"
-          // Static, author-controlled object — no user input reaches this string.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <Analytics />

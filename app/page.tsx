@@ -1,20 +1,22 @@
-import { Hero } from "@/components/hero/Hero";
-import { ProofStrip } from "@/components/sections/ProofStrip";
-import { About } from "@/components/sections/About";
+import { Hero } from "@/components/sections/Hero";
+import { Bento } from "@/components/sections/Bento";
 import { Work } from "@/components/sections/Work";
-import { Founder } from "@/components/sections/Founder";
-import { Stack } from "@/components/sections/Stack";
+import { MoreProjects } from "@/components/sections/MoreProjects";
+import { Impact } from "@/components/sections/Impact";
+import { Skills } from "@/components/sections/Skills";
+import { Activity } from "@/components/sections/Activity";
 import { Contact } from "@/components/sections/Contact";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <ProofStrip />
-      <About />
+      <Bento />
       <Work />
-      <Founder />
-      <Stack />
+      <MoreProjects />
+      <Impact />
+      <Skills />
+      <Activity />
       <Contact />
     </>
   );

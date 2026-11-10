@@ -1,10 +1,5 @@
 import type { SVGProps } from "react";
 
-/**
- * Hand-rolled icon set. Inline SVG beats an icon package here: seven icons, no
- * dependency, no tree-shaking guesswork, and they all inherit currentColor.
- */
-
 type IconProps = SVGProps<SVGSVGElement>;
 
 const base = {
@@ -23,60 +18,6 @@ export function ArrowUpRight(props: IconProps) {
     <svg {...base} {...props}>
       <path d="M7 17 17 7" />
       <path d="M8 7h9v9" />
-    </svg>
-  );
-}
-
-export function ArrowDown(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M12 5v14" />
-      <path d="m19 12-7 7-7-7" />
-    </svg>
-  );
-}
-
-export function Plus(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M12 5v14" />
-      <path d="M5 12h14" />
-    </svg>
-  );
-}
-
-export function Minus(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M5 12h14" />
-    </svg>
-  );
-}
-
-export function Lock(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <rect x="4" y="10" width="16" height="10" rx="1.5" />
-      <path d="M8 10V7a4 4 0 0 1 8 0v3" />
-    </svg>
-  );
-}
-
-export function Mail(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <rect x="3" y="5" width="18" height="14" rx="1.5" />
-      <path d="m3.5 6.5 8.5 6 8.5-6" />
-    </svg>
-  );
-}
-
-export function Download(props: IconProps) {
-  return (
-    <svg {...base} {...props}>
-      <path d="M12 3v12" />
-      <path d="m7 11 5 5 5-5" />
-      <path d="M4 20h16" />
     </svg>
   );
 }
@@ -100,7 +41,23 @@ export function Close(props: IconProps) {
   );
 }
 
-/** Brand glyphs are filled paths, so they opt out of the stroked base. */
+export function Sun(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 3v1.5M12 19.5V21M4.9 4.9l1.1 1.1M18 18l1.1 1.1M3 12h1.5M19.5 12H21M4.9 19.1 6 18M18 6l1.1-1.1" />
+    </svg>
+  );
+}
+
+export function Moon(props: IconProps) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3a7 7 0 0 0 11.5 11.5Z" />
+    </svg>
+  );
+}
+
 function brand(props: IconProps) {
   return {
     viewBox: "0 0 24 24",
@@ -159,7 +116,6 @@ const brandMap: Record<string, (props: IconProps) => React.ReactElement> = {
   Threads: ThreadsMark,
 };
 
-/** Resolves a social label to its glyph, falling back to an arrow. */
 export function SocialIcon({ label, ...props }: IconProps & { label: string }) {
   const Glyph = brandMap[label] ?? ArrowUpRight;
   return <Glyph {...props} />;
