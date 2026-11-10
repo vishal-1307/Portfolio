@@ -1,13 +1,13 @@
 /**
- * The stack, grouped by where it lives. Security is a first-class group, not a
- * bullet under "other" — it is the part of the degree that shows up in the code.
+ * The stack, grouped the way the work actually splits.
+ * Security stays a first-class group — it is the part of the degree that
+ * shows up in the code. Each security item is a fix shipped on a real app.
  */
 
 export type SkillGroup = {
   label: string;
   note?: string;
   items: string[];
-  emphasis?: boolean;
 };
 
 export const skills: SkillGroup[] = [
@@ -17,24 +17,29 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "Backend",
-    items: ["FastAPI", "Node.js", "REST APIs", "WebSockets", "Python"],
+    items: [
+      "FastAPI",
+      "Node.js",
+      "Python",
+      "REST APIs",
+      "WebSockets",
+      "Postgres (Neon)",
+      "Prisma",
+      "Drizzle",
+      "pgvector",
+      "Firebase",
+      "Clerk",
+      "Better Auth",
+      "GitHub Actions",
+    ],
   },
   {
-    label: "Databases",
-    items: ["Postgres (Neon)", "Prisma", "Drizzle", "pgvector", "Firebase"],
-  },
-  {
-    label: "Auth",
-    items: ["Clerk", "Better Auth", "Session & token design"],
-  },
-  {
-    label: "AI & Automation",
-    items: ["Claude API", "Gemini API", "RAG", "YOLOv11 / Roboflow", "n8n", "GitHub Actions"],
+    label: "AI",
+    items: ["Claude API", "Gemini API", "RAG", "YOLOv11 / Roboflow", "n8n"],
   },
   {
     label: "Security",
     note: "From the Cybersecurity degree, applied to my own production apps — each of these is a fix I shipped, not a topic I read.",
-    emphasis: true,
     items: [
       "IDOR prevention",
       "Webhook signature verification (HMAC)",
