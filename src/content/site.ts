@@ -22,12 +22,6 @@ export const site = {
   description:
     "Vishal Kumar Thakur is a full-stack AI developer studying BCA (Cybersecurity) at Lovely Professional University. He builds production apps and founded Mithila KritiKala, a registered charitable trust in Bihar.",
   location: "Benipatti, Madhubani, Bihar",
-  portrait: {
-    src: "/me.webp",
-    alt: "Portrait of Vishal Kumar Thakur",
-    width: 800,
-    height: 836,
-  },
 } as const;
 
 export const socials: Social[] = [
@@ -39,6 +33,7 @@ export const socials: Social[] = [
 ];
 
 export const nav = [
+  { id: "now", label: "Now" },
   { id: "work", label: "Work" },
   { id: "more", label: "More" },
   { id: "impact", label: "Impact" },

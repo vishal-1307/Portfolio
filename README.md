@@ -3,9 +3,10 @@
 Personal site. Next.js App Router, TypeScript, Tailwind v4. Static output,
 deployed on Vercel at **[vishalthakur.tech](https://vishalthakur.tech)**.
 
-Dark by default, with a light-mode toggle. Geist for type. One restrained
-indigo accent. Scroll reveals are a short fade and are skipped when the
-visitor asks for reduced motion, or when JavaScript is off.
+Dark by default, with a light-mode toggle. Instrument Serif for display,
+Geist for UI, a saffron accent. The hero is typographic (no portrait): an
+aurora, grain, and a cursor spotlight. `Cmd`/`Ctrl`+`K` opens a command
+palette. Motion is skipped when the visitor asks for reduced motion.
 
 ---
 
@@ -32,7 +33,7 @@ Copy lives in `src/content/`. Components only render it.
 
 | File | Holds |
 | --- | --- |
-| `site.ts` | Name, title, email, domain, résumé, portrait, social links, nav |
+| `site.ts` | Name, title, email, domain, résumé, social links, nav |
 | `hero.ts` | Role line, intro, and the fact rows under the hero |
 | `projects.ts` | Selected work, then the smaller projects |
 | `founder.ts` | Mithila KritiKala — copy and registration facts |

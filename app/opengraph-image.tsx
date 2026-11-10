@@ -15,35 +15,39 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#09090b",
-          color: "#fafafa",
+          background: "#100e0c",
+          color: "#f6f1e8",
           padding: "72px",
         }}
       >
-        <div style={{ display: "flex", fontSize: 24, color: "#a5b4fc" }}>{site.domain}</div>
+        <div style={{ display: "flex", fontSize: 24, color: "#f0b429", letterSpacing: "0.18em" }}>
+          {site.domain}
+        </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ display: "flex", fontSize: 86, lineHeight: 0.95, letterSpacing: "-0.04em" }}>
+            Vishal Kumar
+          </div>
           <div
             style={{
               display: "flex",
-              fontSize: 84,
-              lineHeight: 1.02,
-              fontWeight: 500,
+              fontSize: 86,
+              lineHeight: 0.95,
               letterSpacing: "-0.04em",
+              color: "#f0b429",
+              fontStyle: "italic",
             }}
           >
-            Vishal Kumar Thakur
+            Thakur
           </div>
-          <div style={{ display: "flex", marginTop: 24, fontSize: 32, color: "#a1a1aa" }}>
-            {site.title}
-          </div>
+          <div style={{ display: "flex", marginTop: 28, fontSize: 32, color: "#cbbba8" }}>{site.title}</div>
         </div>
         <div
           style={{
             display: "flex",
-            borderTop: "1px solid rgba(255,255,255,0.1)",
+            borderTop: "1px solid rgba(246,241,232,0.14)",
             paddingTop: 28,
             fontSize: 22,
-            color: "#8d8d98",
+            color: "#a89480",
           }}
         >
           BCA Cybersecurity, LPU · Benipatti, Bihar

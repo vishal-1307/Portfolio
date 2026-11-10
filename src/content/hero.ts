@@ -2,6 +2,8 @@
 
 export const hero = {
   role: "Full-Stack AI Developer",
+  /** Factual lines only. The first one is the role; the rest are already on the page. */
+  lines: ["Full-Stack AI Developer", "BCA Cybersecurity, LPU", "Founder, Mithila KritiKala"],
   intro:
     "I build production apps — web, mobile, and AI — while studying cybersecurity. I also founded Mithila KritiKala, a registered charitable trust for women’s vocational training and Mithila art in Bihar.",
   ctas: {

@@ -6,20 +6,17 @@ import { useScrollSpy } from "@/lib/use-scroll-spy";
 import { cn } from "@/lib/cn";
 import { Close, Menu } from "@/components/ui/icons";
 import { ThemeToggle } from "./ThemeToggle";
+import { OPEN_COMMAND } from "./CommandPalette";
+import { AnimatePresence, motion } from "motion/react";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 const ids = nav.map((item) => item.id);
+const pill = nav.filter((item) => ["now", "work", "impact", "contact"].includes(item.id));
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const reduce = usePrefersReducedMotion();
   const [open, setOpen] = useState(false);
   const active = useScrollSpy(ids);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -36,41 +33,48 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50">
-      {/* Blur lives on the bar only. A filter on the header would become the
-          containing block for the fixed menu and swallow its clicks. */}
-      <div
-        className={cn(
-          "border-b transition-colors",
-          scrolled || open ? "border-line bg-bg/80 backdrop-blur-md" : "border-transparent bg-bg/70",
-        )}
-      >
-        <nav className="container-page flex h-14 items-center justify-between gap-4" aria-label="Primary">
-        <a href="#top" className="truncate text-sm font-medium tracking-tight text-fg">
-          {site.shortName}
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className="container-page pointer-events-auto relative z-10 flex items-center justify-between gap-2 pt-3">
+        <a
+          href="#top"
+          className="relative z-10 inline-flex h-12 max-w-[40vw] items-center truncate rounded-full border border-line bg-bg/80 px-4 font-serif text-lg tracking-tight text-fg backdrop-blur-md sm:max-w-none"
+        >
+          <span className="sm:hidden">Vishal</span>
+          <span className="hidden sm:inline">{site.shortName}</span>
         </a>
 
-        <ul className="hidden items-center gap-1 lg:flex">
-          {nav.map((item) => {
+        <nav
+          aria-label="Primary"
+          className="hidden items-center gap-1 rounded-full border border-line bg-bg/75 px-1.5 py-1 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.8)] backdrop-blur-md lg:flex"
+        >
+          {pill.map((item) => {
             const isActive = active === item.id;
             return (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  aria-current={isActive ? "true" : undefined}
-                  className={cn(
-                    "inline-flex h-9 items-center rounded-full px-3 text-sm transition-colors",
-                    isActive ? "text-fg" : "text-muted hover:text-fg",
-                  )}
-                >
-                  {item.label}
-                </a>
-              </li>
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={isActive ? "true" : undefined}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-sm transition-colors",
+                  isActive ? "bg-fg text-bg" : "text-muted hover:text-fg",
+                )}
+              >
+                {item.label}
+              </a>
             );
           })}
-        </ul>
+        </nav>
 
-        <div className="flex items-center">
+        <div className="flex items-center gap-1 rounded-full border border-line bg-bg/75 p-1 backdrop-blur-md">
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event(OPEN_COMMAND))}
+            aria-label="Open command palette"
+            className="inline-flex h-10 items-center gap-2 rounded-full px-2.5 text-xs font-medium text-muted transition-colors hover:text-fg"
+          >
+            <span className="hidden sm:inline">Search</span>
+            <kbd className="rounded-md border border-line px-1.5 py-0.5 font-mono text-[10px] text-faint">⌘K</kbd>
+          </button>
           <ThemeToggle />
           <button
             type="button"
@@ -83,27 +87,38 @@ export function Navbar() {
             {open ? <Close className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
-        </nav>
       </div>
 
-      {open ? (
-        <div id="mobile-menu" className="fixed inset-x-0 top-14 bottom-0 z-40 overflow-y-auto border-t border-line bg-bg lg:hidden">
-          <ul className="container-page flex flex-col py-4">
-            {nav.map((item) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={() => setOpen(false)}
-                  aria-current={active === item.id ? "true" : undefined}
-                  className="flex h-12 items-center text-lg text-fg"
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            id="mobile-menu"
+            initial={reduce ? false : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={reduce ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: reduce ? 0 : 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="pointer-events-auto fixed inset-x-0 top-0 bottom-0 overflow-y-auto bg-bg px-6 pt-24 lg:hidden"
+          >
+            <ul className="flex flex-col">
+              {nav.map((item, index) => (
+                <li key={item.id} className="border-b border-line">
+                  <a
+                    href={`#${item.id}`}
+                    onClick={() => setOpen(false)}
+                    aria-current={active === item.id ? "true" : undefined}
+                    className="flex items-baseline justify-between py-4"
+                  >
+                    <span className="font-serif text-4xl tracking-tight text-fg">{item.label}</span>
+                    <span className="font-mono text-xs text-accent tabular">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </header>
   );
 }

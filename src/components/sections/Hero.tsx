@@ -1,54 +1,81 @@
-import Image from "next/image";
 import { hero } from "@/content/hero";
 import { site } from "@/content/site";
+import { Magnetic } from "@/components/ui/Magnetic";
 
 export function Hero() {
+  const cycle = [...hero.lines, hero.role];
+
   return (
-    <div id="top" className="hero-wash">
-      <div className="container-page pb-20 pt-14 md:pb-28 md:pt-20">
-        <Image
-          src={site.portrait.src}
-          alt={site.portrait.alt}
-          width={site.portrait.width}
-          height={site.portrait.height}
-          priority
-          sizes="64px"
-          className="size-16 rounded-full object-cover object-[center_18%] ring-1 ring-line"
-        />
-        <h1 className="mt-8 max-w-4xl text-[clamp(2.6rem,7vw,4.75rem)] font-medium leading-[1.02] tracking-[-0.04em] text-balance text-fg">
-          {site.name}
+    <header id="top" className="relative overflow-hidden">
+      <div className="aurora" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="hero-grain" aria-hidden="true" />
+      <HeroMark />
+
+      <div className="container-page relative z-10 pb-16 pt-28 md:pb-24 md:pt-36">
+        <p className="font-mono text-[11px] tracking-[0.22em] text-faint uppercase">
+          Benipatti, Bihar → Phagwara
+        </p>
+        <h1 className="mt-5 max-w-5xl font-serif text-[clamp(3.1rem,11vw,7.25rem)] leading-[0.9] tracking-[-0.035em] text-fg">
+          <span className="block">Vishal Kumar</span>
+          <span className="block text-accent italic">Thakur</span>
         </h1>
-        <p className="mt-4 text-lg text-muted md:text-xl">{hero.role}</p>
-        <p className="mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg">{hero.intro}</p>
+
+        <div className="role-mask mt-6">
+          <div className="role-cycle text-sm font-medium text-accent sm:text-base">
+            {cycle.map((line, index) => (
+              <span key={`${line}-${index}`}>{line}</span>
+            ))}
+          </div>
+        </div>
+
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">{hero.intro}</p>
+
         <div className="mt-8 flex flex-wrap items-center gap-3">
-          <a
-            href={hero.ctas.primary.href}
-            className="inline-flex h-11 items-center rounded-full bg-fg px-5 text-sm font-medium text-bg transition-opacity hover:opacity-80"
-          >
-            {hero.ctas.primary.label}
-          </a>
+          <Magnetic>
+            <a
+              href={hero.ctas.primary.href}
+              className="inline-flex h-12 items-center rounded-full bg-accent-fill px-5 text-sm font-semibold text-accent-ink shadow-[0_10px_40px_-16px_var(--accent-fill)]"
+            >
+              {hero.ctas.primary.label}
+            </a>
+          </Magnetic>
           <a
             href={`mailto:${site.email}`}
-            className="inline-flex h-11 items-center rounded-full border border-line px-5 text-sm font-medium text-fg transition-colors hover:bg-elevated"
+            className="inline-flex h-12 items-center rounded-full border border-line bg-bg/40 px-5 text-sm font-medium text-fg backdrop-blur-sm transition-colors hover:border-accent hover:text-accent"
           >
             {hero.ctas.secondary.label}
           </a>
           <a
             href={site.resume}
-            className="inline-flex h-11 items-center rounded-full px-3 text-sm font-medium text-muted transition-colors hover:text-fg"
+            className="link-underline inline-flex h-12 items-center px-2 text-sm font-medium text-muted hover:text-fg"
           >
             Résumé
           </a>
         </div>
-        <dl className="mt-14 max-w-2xl border-y border-line">
-          {hero.facts.map((fact) => (
-            <div key={fact.key} className="grid gap-1 border-b border-line py-4 last:border-b-0 sm:grid-cols-[7.5rem_1fr] sm:gap-6">
-              <dt className="text-sm text-faint">{fact.key}</dt>
-              <dd className="text-sm leading-relaxed text-fg">{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
-    </div>
+    </header>
+  );
+}
+
+function HeroMark() {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 420 420"
+      className="pointer-events-none absolute top-24 -right-10 hidden w-[min(42vw,28rem)] text-accent md:block"
+      fill="none"
+    >
+      <circle cx="210" cy="210" r="168" stroke="currentColor" strokeOpacity="0.35" />
+      <circle cx="210" cy="210" r="112" stroke="currentColor" strokeOpacity="0.55" />
+      <path d="M210 62 L318 210 L210 358 L102 210 Z" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M210 118 L274 210 L210 302 L146 210 Z" stroke="var(--madder)" strokeWidth="1.25" />
+      <circle cx="210" cy="210" r="6" fill="currentColor" />
+      <circle cx="318" cy="210" r="4" fill="var(--madder)" />
+      <circle cx="210" cy="62" r="4" fill="currentColor" />
+    </svg>
   );
 }
